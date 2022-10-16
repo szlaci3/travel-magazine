@@ -25,8 +25,9 @@ const Index = (props) => {
       <div className={`sl-message-notice ${cancelling ? "sl-move-up-leave sl-move-up-leave-active" : ""}`}>
         <div className="sl-message-notice-content">
           <div className="sl-message-custom-content sl-message-error">
-            <span className="sl-icon sl-icon-close-circle" onClick={close}/>
+            <span className="sl-icon sl-icon-close-circle"/>
             <span>{msg}</span>
+            <span className="close-msg" onClick={close}>&times;</span>
           </div>
         </div>
       </div>

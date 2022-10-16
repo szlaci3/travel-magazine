@@ -3,4 +3,136 @@ html body {
 }
 html {
   background: #f0f2f5;
+    --sl-primary-color: #1890ff;
+    --sl-primary-color-hover: #40a9ff;
+    --sl-success-color: #52c41a;
+    --sl-error-color: #ff4d4f;
+}
+
+.sl-message {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum', "tnum";
+  position: fixed;
+  top: 8px;
+  left: 0;
+  z-index: 1010;
+  width: 100%;
+  pointer-events: none;
+}
+.sl-message-notice {
+  padding: 8px;
+  text-align: center;
+}
+.sl-message-notice-content {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  pointer-events: all;
+}
+.sl-message-success .sl-icon {
+  color: #52c41a;
+}
+.sl-message-error .sl-icon {
+  color: #ff4d4f;
+}
+.sl-message-warning .sl-icon {
+  color: #faad14;
+}
+.sl-message-info .sl-icon,
+.sl-message-loading .sl-icon {
+  color: #1890ff;
+}
+.sl-message .sl-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 8px;
+  font-size: 16px;
+}
+.sl-message-notice.sl-move-up-leave.sl-move-up-leave-active {
+  animation-name: MessageMoveOut;
+  animation-duration: 0.3s;
+}
+.sl-message {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #000000d9;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: fixed;
+    top: 8px;
+    left: 0;
+    z-index: 1010;
+    width: 100%;
+    pointer-events: none
+}
+
+.sl-message-notice {
+    padding: 8px;
+    text-align: center
+}
+
+.sl-message-notice-content {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
+    pointer-events: all
+}
+
+.sl-message-success .sl-icon {
+    color: var(--sl-success-color)
+}
+
+.sl-message-error .sl-icon {
+    color: var(--sl-error-color)
+}
+
+.sl-message-notice.sl-move-up-leave.sl-move-up-leave-active {
+    animation-name: MessageMoveOut;
+    animation-duration: .3s
+}
+
+@keyframes MessageMoveOut {
+    0% {
+        max-height: 150px;
+        padding: 8px;
+        opacity: 1
+    }
+
+    to {
+        max-height: 0;
+        padding: 0;
+        opacity: 0
+    }
+}
+.sl-move-up-enter,.sl-move-up-appear,.sl-move-up-leave {
+    animation-duration: .2s;
+    animation-fill-mode: both;
+    animation-play-state: paused
+}
+
+.sl-move-up-leave.sl-move-up-leave-active {
+    animation-name: antMoveUpOut;
+    animation-play-state: running;
+    pointer-events: none
+}
+.sl-icon.sl-icon-close-circle {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background: var(--sl-error-color);
 }

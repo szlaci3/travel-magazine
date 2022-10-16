@@ -1,10 +1,18 @@
 import {getPosts, postPosts} from '@/services/services';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import ErrorMsg from '@/components/ErrorMsg';
 
 const CompanySetup = (props) => {
+  let [errorMsg, setErrorMsg] = useState();
+
+
+
   useEffect(async () => {
     let res = await getPosts();
     console.log(res) 
+    if (res.code === 0) {
+      setErrorMsg(res.msg);
+    }
 
     let res2 = await postPosts({a: 1});
     console.log(res2) 
@@ -12,7 +20,12 @@ const CompanySetup = (props) => {
 
 
 
-  return <div>AAABBB</div>
+  return <div>
+    AAABBB
+    <ErrorMsg
+      msg={errorMsg}
+    />
+  </div>
 }
 
 

@@ -1,6 +1,14 @@
+import ErrorMsg from '@/components/ErrorMsg';
 
 const Index = (props) => {
-  return <div>More id: {props?.match?.params?.id}</div>
+  return <div>
+
+    <ErrorMsg
+      msg={null}
+    />
+
+    More id: {props?.match?.params?.id}
+  </div>
 }
 
 

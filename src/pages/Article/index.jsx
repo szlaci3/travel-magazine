@@ -7,7 +7,7 @@ const Index = (props) => {
       msg={null}
     />
 
-    More id: {props?.match?.params?.id}
+    id: {props?.match?.params?.id}
   </div>
 }
 

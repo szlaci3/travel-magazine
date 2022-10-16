@@ -2,7 +2,7 @@ import {getPosts, postPosts} from '@/services/services';
 import {useEffect, useState} from 'react';
 import ErrorMsg from '@/components/ErrorMsg';
 
-const CompanySetup = (props) => {
+const Index = (props) => {
   let [errorMsg, setErrorMsg] = useState();
 
 
@@ -29,4 +29,4 @@ const CompanySetup = (props) => {
 }
 
 
-export default CompanySetup;
+export default Index;

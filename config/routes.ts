@@ -1,13 +1,18 @@
 export default [
-  { path: '/', redirect: '/company-setup' },
+  { path: '/', redirect: '/dashboard' },
   {
-    path: './company-setup',
-    title: 'CSetup',
-    component: './CompanySetup',
+    path: './dashboard',
+    title: 'Dashboard',
+    component: './Dashboard',
   },
   {
-    path: './join-data/:id',
-    title: 'JD',
-    component: './JoinData',
+    path: './article/:id',
+    title: 'Article',
+    component: './Article',
+  },
+  {
+    path: './edition/:id',
+    title: 'Edition',
+    component: './Edition',
   },
 ];

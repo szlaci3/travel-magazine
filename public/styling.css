@@ -56,6 +56,10 @@ html {
   top: 1px;
   margin-right: 8px;
   font-size: 16px;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  border-radius: 50px;
 }
 .sl-message-notice.sl-move-up-leave.sl-move-up-leave-active {
   animation-name: MessageMoveOut;
@@ -131,11 +135,7 @@ html {
     pointer-events: none
 }
 .sl-icon.sl-icon-close-circle {
-  display: inline-block;
-  height: 18px;
-  width: 18px;
   background: var(--sl-error-color);
-  border-radius: 50px;
   top: 3px;
 }
 .close-msg {
@@ -148,4 +148,113 @@ html {
   top: 3px;
   cursor: pointer;
 }
+
+/* popup */
+.popup-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 18;
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+}
+.popup {
+  width: 450px;
+  max-width: 80%;
+  position: absolute;
+  background-color: #FFFFFF;
+  color: #7F7F7F;
+  padding: 15px 20px;
+  border-radius: 2px;
+  z-index: 101;
+}
+.popup.centered {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+.popup-fade {
+  background-color: black;
+  opacity: 0.3;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 100;
+}
+.close-tag {
+  position: absolute;
+  border-radius: 15px;
+  font-size: 38px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  top: 15px;
+  right: 9px;
+  z-index: 10;
+  padding: 0;
+  color: #00000073;
+  line-height: 1;
+  text-decoration: none;
+  background: 0 0;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: color .3s;
+}
+.close-tag:hover {
+  text-decoration: none;
+  color: #000000aa;
+}
+.popup h1 {
+  color: var(--sl-primary-color);
+  font-weight: bold;
+  font-size: 1.6em;
+  padding-left: .2em;
+}
+.popup .button-group {
+  text-align: center;
+  clear: both;
+  margin: auto;
+  position: static;
+}
+.ok-cancel {
+  width: 100px;
+  height: 31px;
+  margin: 2px;
+  border: none;
+  border-radius: 2px;
+  color: #FFFFFF;
+  background-color: var(--sl-primary-color);
+}
+.ok-cancel:disabled {
+  cursor: auto;
+  background-color: #9F9F9F;
+}
+.grey-cancel {
+  background-color: #9F9F9F;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

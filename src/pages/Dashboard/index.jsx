@@ -11,14 +11,14 @@ const Index = (props) => {
 
 
   useEffect(async () => {
-    let res = await getPosts();
-    console.log(res) 
-    if (res.code === 0) {
-      setErrorMsg(res.msg);
-    }
+    // let res = await getPosts();
+    // console.log(res) 
+    // if (res.code === 0) {
+    //   setErrorMsg(res.msg);
+    // }
 
-    let res2 = await postPosts({a: 1});
-    console.log(res2) 
+    // let res2 = await postPosts({a: 1});
+    // console.log(res2) 
   }, []);
 
 

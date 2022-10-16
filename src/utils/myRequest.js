@@ -24,10 +24,15 @@ export default function myRequest(
   }
 
   if (method === 'GET') {
-    options.method = 'GET';
     let urlSearch = makeUrlSearch(options.body);
     url += `?${urlSearch}`;
     delete options.body;
+  } else {
+    options.headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+    };
+    options.body = JSON.stringify(options.body);
   }
 
   return request(url, options)

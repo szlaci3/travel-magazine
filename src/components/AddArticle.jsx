@@ -16,7 +16,7 @@ const Index = (props) => {
 
   const save = () => {
     postPosts({
-      type,
+      name: type,
     })
   } 
 
@@ -29,8 +29,10 @@ const Index = (props) => {
 
       <form>
         <select onChange={ev => setType(ev.target.value)}>
-          <option>AAAA</option>
-          <option>BBB</option>
+          <option value={null} hidden></option>
+          <option>Sight Seeing</option>
+          <option>Nature</option>
+          <option>Gourmand</option>
         </select >
 
         <button type="submit" onClick={save}>Save</button>

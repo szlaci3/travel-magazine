@@ -3,5 +3,10 @@
     "code": 0,
     "msg": "Your request couldn't be handled."
   },
-  "posts": {}
+  "posts": [
+    {
+      "type": "Nature",
+      "id": 0
+    }
+  ]
 }

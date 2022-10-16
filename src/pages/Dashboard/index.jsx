@@ -1,7 +1,8 @@
 import {getPosts, postPosts} from '@/services/services';
 import {useEffect, useState} from 'react';
 import ErrorMsg from '@/components/ErrorMsg';
-import PopupModal from '@/components/PopupModal';
+// import PopupModal from '@/components/PopupModal';
+import AddArticle from '@/components/AddArticle';
 
 const Index = (props) => {
   let [errorMsg, setErrorMsg] = useState();
@@ -27,15 +28,11 @@ const Index = (props) => {
     <ErrorMsg
       msg={errorMsg}
     />
-    <PopupModal
+    <AddArticle
       display={displayAddArticle}
       closePopup={() => setDisplayAddArticle(false)}
       className="add-article"
-    >
-      <h1>Welcome</h1>
-      Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now Now 
-    </PopupModal>
-
+    />
   </div>
 }
 

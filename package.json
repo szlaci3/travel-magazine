@@ -18,7 +18,8 @@
     "moment": "^2.29.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "umi": "^3.5.0"
+    "umi": "^3.5.0",
+    "umi-request": "^1.4.0"
   },
   "devDependencies": {
     "@umijs/fabric": "^2.8.0",

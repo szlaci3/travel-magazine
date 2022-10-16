@@ -1,8 +1,7 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "hello"
-    }
-  ]
+  "fake-error": {
+    "code": 0,
+    "msg": "Your request couldn't be handled."
+  },
+  "posts": {}
 }

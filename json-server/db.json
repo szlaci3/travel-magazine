@@ -7,6 +7,58 @@
     {
       "type": "Nature",
       "id": 0
+    },
+    {
+      "name": "Sight Seeing",
+      "id": 1
+    },
+    {
+      "name": "Gourmand",
+      "id": 2
+    },
+    {
+      "name": "Nature",
+      "id": 3
+    },
+    {
+      "name": "Nature",
+      "id": 4
+    },
+    {
+      "name": "Nature",
+      "id": 5
+    },
+    {
+      "name": "Gourmand",
+      "id": 6
+    },
+    {
+      "name": "Sight Seeing",
+      "id": 7
+    },
+    {
+      "name": "Nature",
+      "id": 8
+    },
+    {
+      "name": "Sight Seeing",
+      "id": 9
+    },
+    {
+      "name": "are",
+      "type": "Sight Seeing",
+      "id": 10
+    },
+    {
+      "name": "",
+      "type": "Sight Seeing",
+      "id": 11
+    },
+    {
+      "title": "tit1",
+      "duration": "dur1",
+      "type": "Sight Seeing",
+      "id": 12
     }
   ]
 }

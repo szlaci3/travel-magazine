@@ -1,4 +1,5 @@
 import PopupModal from '@/components/PopupModal';
+import ValueInput from '@/components/ValueInput';
 import {useEffect, useState} from 'react';
 import {getPosts, postPosts} from '@/services/services';
 
@@ -8,6 +9,8 @@ import {getPosts, postPosts} from '@/services/services';
       // className="setup">
 
 const Index = (props) => {
+  const [title, setTitle] = useState();
+  const [duration, setDuration] = useState();
   const [type, setType] = useState();
 
   if (!props.display) {
@@ -16,7 +19,9 @@ const Index = (props) => {
 
   const save = () => {
     postPosts({
-      name: type,
+      title,
+      duration,
+      type,
     })
   } 
 
@@ -28,6 +33,9 @@ const Index = (props) => {
       <h1>Add Article</h1>
 
       <form>
+        <ValueInput onComplete={val => setTitle(val)}/>
+        <ValueInput onComplete={val => setDuration(val)}/>
+
         <select onChange={ev => setType(ev.target.value)}>
           <option value={null} hidden></option>
           <option>Sight Seeing</option>
@@ -35,7 +43,7 @@ const Index = (props) => {
           <option>Gourmand</option>
         </select >
 
-        <button type="submit" onClick={save}>Save</button>
+        <button type="button" onClick={save}>Save</button>
       </form>
     </PopupModal>
   )

@@ -13,44 +13,6 @@ html body {
   background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;
 }
 
-.sl-message {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
-  font-variant: tabular-nums;
-  line-height: 1.5715;
-  list-style: none;
-  font-feature-settings: 'tnum', "tnum";
-  position: fixed;
-  top: 8px;
-  left: 0;
-  z-index: 1010;
-  width: 100%;
-  pointer-events: none;
-}
-.sl-message-notice {
-  padding: 8px;
-  text-align: center;
-}
-.sl-message-notice-content {
-  display: inline-block;
-  padding: 10px 16px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  pointer-events: all;
-}
-.sl-message-success .sl-icon {
-  color: #52c41a;
-}
-.sl-message-error .sl-icon {
-  color: #ff4d4f;
-}
-.sl-message-warning .sl-icon {
-  color: #faad14;
-}
 .sl-message-info .sl-icon,
 .sl-message-loading .sl-icon {
   color: #1890ff;
@@ -64,10 +26,6 @@ html body {
   height: 18px;
   width: 18px;
   border-radius: 50px;
-}
-.sl-message-notice.sl-move-up-leave.sl-move-up-leave-active {
-  animation-name: MessageMoveOut;
-  animation-duration: 0.3s;
 }
 .sl-message {
     box-sizing: border-box;
@@ -107,6 +65,9 @@ html body {
 
 .sl-message-error .sl-icon {
     color: var(--sl-error-color)
+}
+.sl-message-warning .sl-icon {
+  color: #faad14;
 }
 
 .sl-message-notice.sl-move-up-leave.sl-move-up-leave-active {
@@ -171,9 +132,9 @@ html body {
   position: absolute;
   background-color: #FFFFFF;
   color: #7F7F7F;
-  padding: 15px 20px;
-  border-radius: 2px;
-  z-index: 101;
+  z-index: 100;
+  border-radius: 4px;
+  padding: 18px 26px;
 }
 .popup.centered {
   position: relative;
@@ -243,19 +204,65 @@ html body {
 .grey-cancel {
   background-color: #9F9F9F;
 }
-.block, .popup {
-  border-radius: 4px;
-  padding: 18px 26px;
-}
 .popup.article {
   width: 800px;
   max-width: 90vw;
 }
-
-
-
-
-
+.article-type-select {
+  float: right;
+  position: relative;
+}
+.description-label {
+  vertical-align: top;
+}
+.edit-btn {
+  cursor: pointer;
+  height: 32px;
+  width: 32px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 1px;
+  border: none;
+  color: white;
+  background: var(--sl-middle-grey);
+}
+.type-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 4px;
+}
+.type-icon:after {
+  display: inline-block;
+  line-height: 32px;
+  font-size: 32px;
+  height: 32px;
+  width: 32px;
+  border-radius: 150px;
+  text-align: center;
+  padding: 1px;
+  border: none;
+  color: white;
+  background: white;
+  content: "_";
+}
+.SightSeeing:after {
+  background: #734;
+  content: 'S';
+}
+.Nature:after {
+  background: #704;
+  content: 'N';
+}
+.Gourmand:after {
+  background: #034;
+  content: 'G';
+}
+.edit-btn {
+  margin: 0 0 0 30px;
+  position: absolute;
+  right: 0;
+  top: 41px;
+}
 
 
 

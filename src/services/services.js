@@ -14,6 +14,11 @@ export async function postArticles(params) {
   return myRequest(`${SERVERIP}articles`, params, 'POST');
 }
 
+export async function putArticles(params) {
+  return myRequest(`${SERVERIP}articles/${params.id}`, params, 'PUT');
+}
+
+
 export async function getUsers(params) {
   return myRequest(`${SERVERIP}users`, params, 'GET');
 }

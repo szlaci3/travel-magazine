@@ -1,16 +1,14 @@
-import ErrorMsg from '@/components/ErrorMsg';
+import ArticleComponent from '@/components/ArticleComponent';
 
 const Index = (props) => {
-  return <div>
-
-    <ErrorMsg
-      msg={null}
-    />
-
-    id: {props?.match?.params?.id}
+  return <div className="popup-wrapper">
+    <div className="popup article centered">
+      <ArticleComponent
+        {...props}
+        action="view"
+      />
+    </div>
   </div>
 }
-
-
 
 export default Index;

@@ -1,24 +1,22 @@
-import {getPosts, postPosts} from '@/services/services';
+import {getArticles} from '@/services/services';
 import {useEffect, useState} from 'react';
 import ErrorMsg from '@/components/ErrorMsg';
 // import PopupModal from '@/components/PopupModal';
 import AddArticle from '@/components/AddArticle';
 
 const Index = (props) => {
-  let [errorMsg, setErrorMsg] = useState();
-  let [displayAddArticle, setDisplayAddArticle] = useState(true);
+  const [errorMsg, setErrorMsg] = useState();
+  const [displayAddArticle, setDisplayAddArticle] = useState(true);
 
 
 
   useEffect(async () => {
-    // let res = await getPosts();
-    // console.log(res) 
-    // if (res.code === 0) {
-    //   setErrorMsg(res.msg);
-    // }
+    let res = await getArticles();
+    console.log(res) 
+    if (res.code === 0) {
+      setErrorMsg(res.msg);
+    }
 
-    // let res2 = await postPosts({a: 1});
-    // console.log(res2) 
   }, []);
 
 

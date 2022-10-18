@@ -3,62 +3,32 @@
     "code": 0,
     "msg": "Your request couldn't be handled."
   },
-  "posts": [
-    {
-      "type": "Nature",
-      "id": 0
-    },
-    {
-      "name": "Sight Seeing",
-      "id": 1
-    },
-    {
-      "name": "Gourmand",
-      "id": 2
-    },
-    {
-      "name": "Nature",
-      "id": 3
-    },
-    {
-      "name": "Nature",
-      "id": 4
-    },
-    {
-      "name": "Nature",
-      "id": 5
-    },
-    {
-      "name": "Gourmand",
-      "id": 6
-    },
-    {
-      "name": "Sight Seeing",
-      "id": 7
-    },
-    {
-      "name": "Nature",
-      "id": 8
-    },
-    {
-      "name": "Sight Seeing",
-      "id": 9
-    },
-    {
-      "name": "are",
-      "type": "Sight Seeing",
-      "id": 10
-    },
-    {
-      "name": "",
-      "type": "Sight Seeing",
-      "id": 11
-    },
+  "articles": [
     {
       "title": "tit1",
       "duration": "dur1",
       "type": "Sight Seeing",
-      "id": 12
+      "id": 0
+    },
+    {
+      "title": "As",
+      "duration": "AAA",
+      "type": "Sight Seeing",
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "name": "Johan Wilson",
+      "id": 0
+    },
+    {
+      "name": "Mandy Rilke",
+      "id": 1
+    },
+    {
+      "name": "Sandy Moon",
+      "id": 2
     }
   ]
 }

@@ -1,12 +1,16 @@
-html body {
-  font-family: Helvetica, Arial, sans-serif;
-}
 html {
-  background: #f0f2f5;
     --sl-primary-color: #1890ff;
     --sl-primary-color-hover: #40a9ff;
     --sl-success-color: #52c41a;
     --sl-error-color: #ff4d4f;
+    --sl-dark-grey: #3c3c3c;
+    --sl-middle-grey: #5d5d5d;
+    --sl-light-grey: #9a9a9a;
+
+}
+html body {
+  font-family: Helvetica, Arial, sans-serif;
+  background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;
 }
 
 .sl-message {
@@ -212,7 +216,7 @@ html {
   color: #000000aa;
 }
 .popup h1 {
-  color: var(--sl-primary-color);
+  color: var(--sl-middle-grey);
   font-weight: bold;
   font-size: 1.6em;
   padding-left: .2em;
@@ -239,12 +243,14 @@ html {
 .grey-cancel {
   background-color: #9F9F9F;
 }
-
-
-
-
-
-
+.block, .popup {
+  border-radius: 4px;
+  padding: 18px 26px;
+}
+.popup.article {
+  width: 800px;
+  max-width: 90vw;
+}
 
 
 

@@ -1,6 +1,7 @@
 function ValueInput(props) {
   let {
     type = "text",
+    inputProps = {},
   } = props;
 
   const onInputChange = (keyEvent) => {
@@ -16,7 +17,7 @@ function ValueInput(props) {
 
 
   return (
-    <input className={"value-input " + (props.className || "")} type={type} onChange={onInputChange}/>
+    <input className={"value-input " + (props.className || "")} type={type} {...inputProps} onChange={onInputChange}/>
   );
 }
 

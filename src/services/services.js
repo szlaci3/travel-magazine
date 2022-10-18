@@ -6,12 +6,16 @@ export async function fakeError(params) {
   return myRequest(`${SERVERIP}fake-error`, params, 'GET');
 }
 
-export async function getPosts(params) {
-  return myRequest(`${SERVERIP}posts`, params, 'GET');
+export async function getArticles(params) {
+  return myRequest(`${SERVERIP}articles`, params, 'GET');
 }
 
-export async function postPosts(params) {
-  return myRequest(`${SERVERIP}posts`, params, 'POST');
+export async function postArticles(params) {
+  return myRequest(`${SERVERIP}articles`, params, 'POST');
+}
+
+export async function getUsers(params) {
+  return myRequest(`${SERVERIP}users`, params, 'GET');
 }
 
 

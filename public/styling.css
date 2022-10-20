@@ -1,15 +1,21 @@
 html {
     --sl-primary-color: #1890ff;
+    --sl-primary-color-outline: #1890ff33;
     --sl-primary-color-hover: #40a9ff;
     --sl-success-color: #52c41a;
     --sl-error-color: #ff4d4f;
     --sl-dark-grey: #3c3c3c;
     --sl-middle-grey: #5d5d5d;
     --sl-light-grey: #9a9a9a;
+    
+    --todo-color: #0d5c91;
+    --in-progress-color: #f3c600;
+    --completed-color: #39920d;
 
 }
 html body {
   font-family: Helvetica, Arial, sans-serif;
+  padding-top: 15px;
   background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;
 }
 
@@ -212,7 +218,7 @@ html body {
   float: right;
   position: relative;
 }
-.description-label {
+.article .description > span {
   vertical-align: top;
 }
 .edit-btn {
@@ -264,9 +270,196 @@ html body {
   top: 41px;
 }
 
-
-
-
+/* move arrows */
+.move {
+  opacity: 0;
+  transition: opacity .2s;
+  margin: 0 3px;
+  cursor: pointer;
+}
+.ticket:hover .move {
+  opacity: 1;
+}
+.move.right {
+    display: inline-block;
+    border-color: transparent;
+    border-left-color: #c4e7ff;
+    border-style: solid;
+    border-width: 16px 0 16px 10px;
+    vertical-align: middle;
+    background: transparent;
+}
+.move.left {
+    display: inline-block;
+    border-color: transparent;
+    border-right-color: #c4e7ff;
+    border-style: solid;
+    border-width: 16px 10px 16px 0;
+    vertical-align: middle;
+    background: transparent;
+}
+.move.disabled {
+  visibility: hidden;
+  display: inline-block;
+  width: 10px;
+}
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+/* Wed eve */
+.article .title {
+  font-size: 24px;
+}
+input {
+    margin: 0;
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    min-width: 0;
+    padding: 4px 7px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all .3s;
+}
+select {
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    min-width: 115px;
+    padding: 4px 2px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.6;
+    height: 32px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all .3s;
+}
+textarea {
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    padding: 4px 7px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all .3s;
+}
+input[type=number] {
+  padding-right: 0;
+}
+textarea:hover,
+select:hover,
+input:hover {
+  border-color: var(--sl-primary-color-hover);
+}
+textarea:focus,
+select:focus,
+input:focus {
+    border-color: var(--sl-primary-color-hover);
+    box-shadow: 0 0 0 2px var(--sl-primary-color-outline);
+    outline: 0;
+}
+.article label > span {
+  padding-right: 12px;
+  color: var(--sl-light-grey);
+}
+.article .title input {
+  padding: 1px 5px;
+}
+.article label {
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.article {
+  color: var(--sl-dark-grey);
+}
+.article .assignee,
+.article .duration {
+  margin-left: 15px;
+}
+.article .duration input {
+  width: 50px;
+}
+.article .title > span,
+.article .reporter > span,
+.article .description > span {
+  display: inline-block;
+  width: 84px;
+  text-align: right;
+}
+.article .description {
+  width: 74.9%;
+}
+.article .description textarea {
+  width: calc(100% - 84px);
+  min-height: 100px;
+  max-height: 50vh;
+}
+.view-value {
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    min-width: 115px;
+    padding: 4px 7px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid transparent;
+}
+.block {
+    background: #e9f7ff;
+    max-width: 1200px;
+    width: 96vw;
+    padding: 12px 10px;
+    margin: 0 auto 15px;
+    border-radius: 3px;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+}
+.block > .column {
+  min-height: 80vh;
+}
+.column.todo .ticket {
+  border-bottom: 6px solid var(--todo-color);
+}
+.column.in-progress .ticket {
+  border-bottom: 6px solid var(--in-progress-color);
+}
+.column.completed .ticket {
+  border-bottom: 6px solid var(--completed-color);
+}
+.ticket {
+  border-radius: 3px;
+  background: white;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+.ticket > .inner {
+  width: calc(100% - 32px);
+}
 
 
 

@@ -24,6 +24,7 @@ const Index = (props) => {
     AAABBB
     <ErrorMsg
       msg={errorMsg}
+      setMsg={setErrorMsg}
     />
   </div>
 }

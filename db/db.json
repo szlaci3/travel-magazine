@@ -3,6 +3,21 @@
     "code": 0,
     "msg": "Your request couldn't be handled."
   },
+  "trackpad": {
+    "statuses": [
+      [
+        1,
+        3
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2
+      ]
+    ]
+  },
   "articles": [
     {
       "title": "tit1",

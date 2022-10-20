@@ -9,13 +9,12 @@ const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
   const [users, setUsers] = useState([]);
   const [data, setData] = useState({});
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
 
   const id = props.match?.params?.id;
 
   useEffect(async () => {
     let res = await getUsers();
-    console.log(res) 
     if (res.code === 0) {
       setErrorMsg(res.msg);
     } else {
@@ -44,20 +43,21 @@ const Index = (props) => {
     <>
       <ErrorMsg
         msg={errorMsg}
+        setMsg={setErrorMsg}
       />
 
       {props.action === "add" && <h2>Add Article</h2>}
 
       <form>
-        <label>
+        <label className="title">
           <span>Title</span>
-          <ValueInput name="title" value={data.title} onComplete={onChange}/>
+          <ValueInput name="title" value={data.title} onComplete={onChange} disabled={!isEdit}/>
         </label>
 
         <div className="article-type-select">
-          <label>
+          <label className="type">
             <span>Type</span>
-            <select name="type" value={data.type} onChange={onChange}>
+            <select name="type" value={data.type} onChange={onChange} disabled={!isEdit}>
               <option value={null} hidden></option>
               <option>Sight Seeing</option>
               <option>Nature</option>
@@ -73,31 +73,33 @@ const Index = (props) => {
         </div>
 
         <div>
-          <label>
+          <label className="reporter">
             <span>Reporter</span>
-            <select name="reporter" value={data.reporter} onChange={onChange}>
+            <select name="reporter" value={data.reporter} onChange={onChange} disabled={!isEdit}>
               <option value={null} hidden></option>
               {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
             </select>
           </label>
 
-          <label>
+          {<div className="view-value">Pseudo Moon</div>}
+          
+          <label className="assignee">
             <span>Assignee</span>
-            <select name="assignee" value={data.assignee} onChange={onChange}>
+            <select name="assignee" value={data.assignee} onChange={onChange} disabled={!isEdit}>
               <option value={null} hidden></option>
               {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
             </select>
           </label>
 
-          <label>
+          <label className="duration">
             <span>Hours needed</span>
-            <ValueInput type="number" inputProps={{min: 0}} name="duration" value={data.duration} onComplete={onChange}/>
+            <ValueInput type="number" inputProps={{min: 0}} name="duration" value={data.duration} onComplete={onChange} disabled={!isEdit}/>
           </label>
         </div>
 
-        <label>
-          <span className="description-label">Description</span>
-          <textarea name="description" value={data.description} onChange={onChange}/>
+        <label className="description">
+          <span>Description</span>
+          <textarea name="description" value={data.description} onChange={onChange} disabled={!isEdit}/>
         </label>
 
 

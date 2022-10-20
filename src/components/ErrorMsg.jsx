@@ -2,21 +2,16 @@ import {useEffect, useState} from 'react';
 import {delay} from '@/utils/utils';
 
 const Index = (props) => {
-  const [msg, setMsg] = useState(props.msg);
   const [cancelling, setCancelling] = useState(false);
-
-  useEffect(() => {
-    setMsg(props.msg);
-  }, [props.msg]);
 
   close = async () => {
     setCancelling(true);
     await delay(400);
     setCancelling(false);
-    setMsg(null);
+    props.setMsg(null);
   }
 
-  if (!msg) {
+  if (!props.msg) {
     return null;
   }
 
@@ -26,7 +21,7 @@ const Index = (props) => {
         <div className="sl-message-notice-content">
           <div className="sl-message-custom-content sl-message-error">
             <span className="sl-icon sl-icon-close-circle"/>
-            <span>{msg}</span>
+            <span>{props.msg}</span>
             <span className="close-msg" onClick={close}>&times;</span>
           </div>
         </div>

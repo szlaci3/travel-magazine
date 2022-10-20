@@ -23,6 +23,14 @@ export async function getUsers(params) {
   return myRequest(`${SERVERIP}users`, params, 'GET');
 }
 
+export async function getStatuses(params) {
+  return myRequest(`${SERVERIP}trackpad`, params, 'GET');
+}
+
+export async function putStatuses(params) {
+  return myRequest(`${SERVERIP}trackpad`, params, 'POST');
+}
+
 
 
 

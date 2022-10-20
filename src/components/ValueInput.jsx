@@ -25,7 +25,7 @@ function ValueInput(props) {
 
 
   return (
-    <input className={"value-input " + (props.className || "")} type={type} {...inputProps} name={props.name} value={value || ""} onChange={onInputChange}/>
+    <input className={"value-input " + (props.className || "")} type={type} {...inputProps} name={props.name} value={value || ""} onChange={onInputChange} disabled={props.disabled}/>
   );
 }
 

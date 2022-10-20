@@ -18,6 +18,10 @@ export async function putArticles(params) {
   return myRequest(`${SERVERIP}articles/${params.id}`, params, 'PUT');
 }
 
+export async function deleteArticle(params) {
+  return myRequest(`${SERVERIP}articles/${params.id}`, params, 'DELETE');
+}
+
 
 export async function getUsers(params) {
   return myRequest(`${SERVERIP}users`, params, 'GET');

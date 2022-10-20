@@ -1,11 +1,6 @@
 import PopupModal from '@/components/PopupModal';
 import ArticleComponent from '@/components/ArticleComponent';
 
-    // <AddArticle
-      // display={displaySetup}
-      // closePopup={closeSetup}
-      // className="setup">
-
 const Index = (props) => {
   if (!props.display) {
     return null;

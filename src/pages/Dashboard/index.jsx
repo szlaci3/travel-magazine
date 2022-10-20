@@ -12,27 +12,25 @@ const Index = (props) => {
   const [statuses, setStatuses] = useState();
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
 
-// return null;
-
-
   useEffect(async () => {
     let usersRes = await getUsers();
-    console.log(usersRes) 
     if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
       setUsers(usersRes);
     }
 
+    loadArticles();
+  }, []);
+
+  const loadArticles = async () => {
     let articlesRes = await getArticles();
-    console.log(articlesRes) 
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
       setArticles(articlesRes);
     }
-  }, []);
-
+  }
 
   const loadData = async () => {
     let statusesRes = await getStatuses();
@@ -41,7 +39,8 @@ const Index = (props) => {
       setErrorMsg(statusesRes.msg);
     }
 
-    let _data = statusesRes.statuses.map(col => col.map(id => articles.find(article => article.id === id)));
+    let _data = statusesRes.statuses.map(col => col.map(id => articles.find(article => article.id === id)).filter(one => one));
+
     setData(_data);
     setStatuses(statusesRes.statuses);
   }
@@ -61,11 +60,17 @@ const Index = (props) => {
       display={displayAddArticle}
       closePopup={() => setDisplayAddArticle(false)}
       className="add-article"
-    />
+      statuses={statuses}
+      loadArticles={loadArticles}
+     />
 
-    {false && <header>
+    <header>
       <h1>Travel Magazine</h1>
-    </header>}
+    </header>
+
+    <div className="add-wrapper">
+      <button className="add-btn" onClick={() => setDisplayAddArticle(true)}>Add Article</button>
+    </div>
 
     <article className="block">
       <section className="column todo">

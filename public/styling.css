@@ -166,7 +166,7 @@ html body {
   height: 30px;
   text-align: center;
   top: 15px;
-  right: 9px;
+  right: 19px;
   z-index: 10;
   padding: 0;
   color: #00000073;
@@ -182,34 +182,6 @@ html body {
   text-decoration: none;
   color: #000000aa;
 }
-.popup h1 {
-  color: var(--sl-middle-grey);
-  font-weight: bold;
-  font-size: 1.6em;
-  padding-left: .2em;
-}
-.popup .button-group {
-  text-align: center;
-  clear: both;
-  margin: auto;
-  position: static;
-}
-.ok-cancel {
-  width: 100px;
-  height: 31px;
-  margin: 2px;
-  border: none;
-  border-radius: 2px;
-  color: #FFFFFF;
-  background-color: var(--sl-primary-color);
-}
-.ok-cancel:disabled {
-  cursor: auto;
-  background-color: #9F9F9F;
-}
-.grey-cancel {
-  background-color: #9F9F9F;
-}
 .popup.article {
   width: 800px;
   max-width: 90vw;
@@ -221,16 +193,29 @@ html body {
 .article .description > span {
   vertical-align: top;
 }
-.edit-btn {
+.btns button {
   cursor: pointer;
   height: 32px;
-  width: 32px;
   border-radius: 7px;
   text-align: center;
   padding: 1px;
   border: none;
   color: white;
+}
+.edit-btn {
+  background: #7395f7;
+}
+.delete-btn {
+  background: #ff5b5b;
+}
+.back-btn {
   background: var(--sl-middle-grey);
+}
+.save-btn {
+  background: #72d452;
+}
+.cancel-btn {
+  background: #a5a5a5;
 }
 .type-icon {
   display: inline-block;
@@ -252,22 +237,31 @@ html body {
   content: "_";
 }
 .SightSeeing:after {
-  background: #734;
+  background: #704;
   content: 'S';
 }
 .Nature:after {
-  background: #704;
+  background: #0d7dd2;
   content: 'N';
 }
 .Gourmand:after {
   background: #034;
   content: 'G';
 }
-.edit-btn {
-  margin: 0 0 0 30px;
-  position: absolute;
-  right: 0;
-  top: 41px;
+.ticket .type-icon {
+  float: right;
+  margin: 4px;
+}
+.ticket .type-icon:after {
+  line-height: 15px;
+  font-size: 14px;
+  height: 16px;
+  width: 16px;
+}
+.ticket .reporter,
+.ticket .assignee {
+    font-weight: bold;
+    font-size: 12px;  
 }
 
 /* move arrows */
@@ -303,18 +297,7 @@ html body {
   display: inline-block;
   width: 10px;
 }
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
-/* Wed eve */
+
 .article .title {
   font-size: 24px;
 }
@@ -414,6 +397,8 @@ input:focus {
   width: calc(100% - 84px);
   min-height: 100px;
   max-height: 50vh;
+  line-height: 16px;
+  padding-top: 2px;
 }
 .view-value {
     margin: 0;
@@ -425,6 +410,16 @@ input:focus {
     font-size: 14px;
     line-height: 1.6;
     border: 1px solid transparent;
+}
+.view-value.select {
+    padding: 4px 6px;
+}
+header,
+.add-wrapper {
+    max-width: 1200px;
+    width: 96vw;
+    padding: 0 10px;
+    margin: 0 auto;
 }
 .block {
     background: #e9f7ff;
@@ -441,12 +436,18 @@ input:focus {
 .block > .column {
   min-height: 80vh;
 }
+.popup.article.status-none {
+  border-bottom: 6px solid transparent;
+}
+.popup.article.status-0,
 .column.todo .ticket {
   border-bottom: 6px solid var(--todo-color);
 }
+.popup.article.status-1,
 .column.in-progress .ticket {
   border-bottom: 6px solid var(--in-progress-color);
 }
+.popup.article.status-2,
 .column.completed .ticket {
   border-bottom: 6px solid var(--completed-color);
 }
@@ -456,14 +457,43 @@ input:focus {
   margin-bottom: 12px;
   display: flex;
   align-items: center;
+  padding: 10px 0;
 }
 .ticket > .inner {
   width: calc(100% - 32px);
+  color: inherit;
 }
-
-
-
-
+.value-input:disabled,
+textarea:disabled {
+  border-color: transparent;
+}
+.btns {
+  display: grid;
+  grid-template-columns: repeat(2, 80px);
+  grid-gap: 10px;
+  width: 170px;
+  margin-left: auto;
+}
+.btns.view {
+  grid-template-columns: repeat(3, 80px);
+  width: 260px;
+}
+.ticket .title {
+  font-size: 17px;
+  margin: 0 24px 0 0;
+  display: inline-block;
+}
+.add-btn {
+  color: #d0eeff;
+  background: #0d7dd2;
+  border: none;
+  border-radius: 17px 17px 0 0;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+body > div {
+  padding-bottom: 1px;
+}
 
 
 

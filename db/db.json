@@ -8,17 +8,18 @@
       [
         3,
         2,
-        5,
-        6,
-        7
+        7,
+        8
       ],
       [
-        4,
         1,
-        10
+        10,
+        6,
+        5
       ],
       [
-        0
+        0,
+        4
       ]
     ]
   },
@@ -57,6 +58,15 @@
       "duration": "9",
       "description": "They're poor but they cook well",
       "id": 7
+    },
+    {
+      "title": "3",
+      "description": "333",
+      "type": "Sight Seeing",
+      "reporter": "0",
+      "assignee": "0",
+      "duration": "1",
+      "id": 8
     }
   ],
   "users": [

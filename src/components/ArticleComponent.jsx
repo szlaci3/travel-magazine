@@ -9,6 +9,7 @@ const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
   const [users, setUsers] = useState([]);
   const [data, setData] = useState({});
+  const [initial, setInitial] = useState({});
   const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
   const [sureDelete, setSureDelete] = useState(0);
   const [copyMsg, setCopyMsg] = useState();
@@ -29,6 +30,7 @@ const Index = (props) => {
         history.push("/404");
       } else {
         setData(firstInArray);
+        setInitial(firstInArray);
       }
     }
   }, []);
@@ -101,6 +103,11 @@ const Index = (props) => {
     } else {
       history.push("/dashboard");
     }
+  }
+
+  const onCancel = () => {
+    setIsEdit(false);
+    setData(initial);
   }
 
   const copyToClipboard = () => {
@@ -208,7 +215,7 @@ const Index = (props) => {
             {!isEdit ? (
               <button type="button" className="edit-btn" onClick={() => setIsEdit(true)}>Edit</button>
             ) : (
-              <button type="button" className="cancel-btn" onClick={() => setIsEdit(false)}>Cancel</button>
+              <button type="button" className="cancel-btn" onClick={onCancel}>Cancel</button>
             )}
             {!isEdit ? (
               <button type="button" className="back-btn" onClick={() => history.push("/dashboard")}>Back</button>

@@ -34,7 +34,6 @@ const Index = (props) => {
 
   const loadData = async () => {
     let statusesRes = await getStatuses();
-    console.log(statusesRes) 
     if (statusesRes.code === 0) {
       setErrorMsg(statusesRes.msg);
     }

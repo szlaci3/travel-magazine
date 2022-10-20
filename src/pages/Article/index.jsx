@@ -12,7 +12,6 @@ const Index = (props) => {
 
   useEffect(async () => {
     let statusesRes = await getStatuses();
-    console.log(statusesRes) 
     if (statusesRes.code === 0) {
       setErrorMsg(statusesRes.msg);
       return;

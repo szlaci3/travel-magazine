@@ -3,14 +3,15 @@ import {useEffect, useState} from 'react';
 import {history} from 'umi';
 import {postArticles, putArticles, getUsers, getArticles, putStatuses, deleteArticle} from '@/services/services';
 import ErrorMsg from '@/components/ErrorMsg';
-import {hasVal} from '@/utils/utils';
+import {hasVal, delay} from '@/utils/utils';
 
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
-  const [statuses, setStatuses] = useState();
   const [users, setUsers] = useState([]);
   const [data, setData] = useState({});
   const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
+  const [sureDelete, setSureDelete] = useState(0);
+  const [copyMsg, setCopyMsg] = useState();
 
   const id = props.match?.params?.id;
 
@@ -24,21 +25,31 @@ const Index = (props) => {
 
     if (props.action === "view" && hasVal(id)) {
       let [firstInArray] = await getArticles({id});
-      setData(firstInArray);
+      if (!firstInArray) {
+        history.push("/404");
+      } else {
+        setData(firstInArray);
+      }
     }
   }, []);
-
-  useEffect(() => {
-    if (props.statuses) {
-      setStatuses(props.statuses);
-    }
-  }, [props.statuses]);
 
   const onChange = ev => {
     setData({...data, [ev.target.name]: ev.target.value});
   }
 
   const deleteOneArticle = async () => {
+    if (sureDelete !== 0) {
+      onSureDelete();
+    } else {
+      setSureDelete(1);
+      await delay(300);
+      setSureDelete(2);
+      await delay(2500);
+      setSureDelete(0);
+    }
+  }
+
+  const onSureDelete = async () => {
     let res = await deleteArticle({id});
 
     if (res.code === 0) {
@@ -66,6 +77,7 @@ const Index = (props) => {
   } 
 
   const addToStatuses = async (newId) => {
+    let {statuses} = props;
     let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
     _statuses[0].push(newId);
     let res = await putStatuses({statuses: _statuses});
@@ -79,6 +91,7 @@ const Index = (props) => {
   }
 
   const removeFromStatuses = async () => {
+    let {statuses} = props;
     let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
     let currentIdx = _statuses[props.status].indexOf(id);
     _statuses[props.status].splice(currentIdx, 1);
@@ -89,6 +102,35 @@ const Index = (props) => {
       history.push("/dashboard");
     }
   }
+
+  const copyToClipboard = () => {
+    let text = window.location.href;
+
+    if (window.clipboardData && window.clipboardData.setData) {
+      // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+      return clipboardData.setData("Text", text);
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+      let textarea = document.createElement("textarea");
+      textarea.textContent = text;
+      textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+      }
+      catch (ex) {
+        console.warn("Copy to clipboard failed.", ex);
+        setErrorMsg("Copy to clipboard failed.");
+        return false;
+      }
+      finally {
+        document.body.removeChild(textarea);
+        setCopyMsg("Copied.");
+      }
+    }
+  }
+
+
 
 
   return (
@@ -162,17 +204,18 @@ const Index = (props) => {
 
         <div className={`btns ${props.action}`}>
           {props.action === "view" && <>
-            <button type="button" className="delete-btn" onClick={deleteOneArticle}>Delete</button>
+            <button type="button" className={`delete-btn sure-${sureDelete}`} onClick={deleteOneArticle}>{sureDelete !== 0 ? "Sure ?" : "Delete"}</button>
             {!isEdit ? (
               <button type="button" className="edit-btn" onClick={() => setIsEdit(true)}>Edit</button>
             ) : (
               <button type="button" className="cancel-btn" onClick={() => setIsEdit(false)}>Cancel</button>
             )}
             {!isEdit ? (
-              <button type="button" className="back-btn" onClick={history.goBack}>Back</button>
+              <button type="button" className="back-btn" onClick={() => history.push("/dashboard")}>Back</button>
             ) : (
               <button type="button" className="save-btn" onClick={save}>Save</button>
             )}
+            <button type="button" className="copy-btn" onClick={copyToClipboard}>{copyMsg || "Copy Link"}</button>
           </>}
 
           {props.action === "add" && <>

@@ -11,8 +11,8 @@ export default [
     component: './Article',
   },
   {
-    path: './edition/:id',
-    title: 'Edition',
-    component: './Edition',
+    path: '*',
+    title: '404',
+    component: './404',
   },
 ];

@@ -202,11 +202,17 @@ html body {
   border: none;
   color: white;
 }
+.copy-btn {
+  background: var(--sl-light-grey);
+}
 .edit-btn {
   background: #7395f7;
 }
 .delete-btn {
   background: #ff5b5b;
+  position: relative;
+  left: 0;
+  transition: all 2.5s linear;
 }
 .back-btn {
   background: var(--sl-middle-grey);
@@ -215,7 +221,7 @@ html body {
   background: #72d452;
 }
 .cancel-btn {
-  background: #a5a5a5;
+  background: #b3b3b3;
 }
 .type-icon {
   display: inline-block;
@@ -475,8 +481,8 @@ textarea:disabled {
   margin-left: auto;
 }
 .btns.view {
-  grid-template-columns: repeat(3, 80px);
-  width: 260px;
+  grid-template-columns: repeat(4, 80px);
+  width: 350px;
 }
 .ticket .title {
   font-size: 17px;
@@ -494,7 +500,17 @@ textarea:disabled {
 body > div {
   padding-bottom: 1px;
 }
-
+.delete-btn.sure-1 {
+  background: #b00;
+  left: -80px;
+  transition: all .3s linear;
+}
+.ticket .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 
 

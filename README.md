@@ -1,5 +1,6 @@
 # Documentation
 **Technical assignment front-end engineer**
+
 **Author: Laszlo Szalai**
 
 ## How To Run
@@ -16,14 +17,17 @@ npm start
 
 
 ## "User's Manual"
-You work for a Travel Magazin and this Kanban will help you manage the tasks of the team.
-A reporter creates a ticket for the assignee. Then the assignee takes this task and fulfils it by writing the article. 
+You work for a Travel Magazine and this Kanban will help you manage the tasks of the team.
+A reporter creates a ticket for the assignee. Then the assignee takes this task and fulfills it by writing the article. 
 The tickets are articles that can come to existence as an idea in the Todo column.
 Once the assignee starts writing, he/she should move it to the In Progress column.
 If it's ready to be published, it should be moved to the Completed column.
+Hover on the ticket to see the moving arrows.
+Click on a ticket to open it in a new page where you see more details and you can edit or delete it.
 
 ## Development
 **Packages**
+
 The collection of packages that get installed from package.json are based on what the create-umi package uses. This gave me a good scaffolding to start the project, because it includes webpack, routing, the Link component, history object, and the 404 page. 
 
 **Fake api**
@@ -67,4 +71,4 @@ In css I used the grid layout for ticket columns, which is better than a flex la
 
 **Future tasks**
 A real project would require additional work, which I haven't dealt with, to reduce the amount of time invested:
-Tests, form validation, input sanitization, success messages, spinner while loading, more customisation, login etc.
+Tests, form validation, input sanitization, timestamps, success messages, spinner while loading, more customisation, login etc.

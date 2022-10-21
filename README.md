@@ -59,6 +59,7 @@ The ArticleComponent is reused for these cases:
 - Add
 - View
 - Edit
+
 To show the add article window, ArticleComponent is wrapped into the AddArticle component to be displayed inside a PopupModal. This has {action: "add"}, so some buttons have texts and functions specific to the 'Add' process.
 For an existing article, the Article/index.js page is used, containing the ArticleComponent. It has id and {action: "view"} and it calls getStatuses first, which is needed when an article is deleted.
 

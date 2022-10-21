@@ -31,13 +31,16 @@ Click on a ticket to open it in a new page where you see more details and you ca
 The collection of packages that get installed from package.json are based on what the create-umi package uses. This gave me a good scaffolding to start the project, because it includes webpack, routing, the Link component, history object, and the 404 page. 
 
 **Fake api**
+
 I installed the json-server package globally. The utils/myRequest.js file uses umi-request's "request" function for api calls. The services.js file defines all api call functions, and I import the ones I need into each react component.
 
 **Hooks**
+
 I use useState for all state variables. Due to the small size of the project, store and reducers were not necessary.
 Another hook is useEffect. I frequently use it to intercept changes to props or state and take some action. Most often this replaces the old school componentWillReceiveProps life cycle function.
 
 **Dashboard**
+
 In Dashboard/index.js the following is executed :
 
 Initially we get the users and the articles from the server.
@@ -51,6 +54,7 @@ The Ticket component represents an article.
 It receives the id as key, to make sure react can handle to render such changes like moving a ticket. 
 
 **Article**
+
 The ArticleComponent is reused for these cases:
 - Add
 - View
@@ -61,6 +65,7 @@ For an existing article, the Article/index.js page is used, containing the Artic
 For sharing a link to the ticket, there is a Copy Link button on the Article page.
 
 **Choices**
+
 The move arrows that the Tickets have on the Dashboard, were a quick alternative to a drag/drop solution, but it can also provide a good user experience by the simple and reliable behaviour.
 
 The add article form is not exactly a magnified Ticket from the dashboard page, but it is not very different from it. In this way it is close to a what-you-see-is-what-you-get display, but still has labels to guide the user while filling in.
@@ -70,5 +75,6 @@ The ValueInput reusable component can help to encapsulate an inner state that up
 In css I used the grid layout for ticket columns, which is better than a flex layout, in setting the gap size and equal columns width, making the app responsive.
 
 **Future tasks**
+
 A real project would require additional work, which I haven't dealt with, to reduce the amount of time invested:
 Tests, form validation, input sanitization, timestamps, success messages, spinner while loading, more customisation, login etc.

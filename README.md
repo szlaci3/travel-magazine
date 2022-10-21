@@ -1,23 +1,28 @@
 # Documentation
-# Technical assignment front-end engineer
-# Author: Laszlo Szalai
+**Technical assignment front-end engineer**
+**Author: Laszlo Szalai**
 
-**How To Run**
+## How To Run
 In a command prompt:
+```bash
 npm i
 npm i json-server -g
 json-server db/db.json
+```
+```bash
 npm start
+```
 (You'll need to open another command prompt to run the last line.)
 
 
-**"User's Manual"**
+## "User's Manual"
 You work for a Travel Magazin and this Kanban will help you manage the tasks of the team.
 A reporter creates a ticket for the assignee. Then the assignee takes this task and fulfils it by writing the article. 
 The tickets are articles that can come to existence as an idea in the Todo column.
 Once the assignee starts writing, he/she should move it to the In Progress column.
 If it's ready to be published, it should be moved to the Completed column.
 
+## Development
 **Packages**
 The collection of packages that get installed from package.json are based on what the create-umi package uses. This gave me a good scaffolding to start the project, because it includes webpack, routing, the Link component, history object, and the 404 page. 
 
@@ -43,9 +48,9 @@ It receives the id as key, to make sure react can handle to render such changes 
 
 **Article**
 The ArticleComponent is reused for these cases:
-Add
-View
-Edit
+- Add
+- View
+- Edit
 To show the add article window, ArticleComponent is wrapped into the AddArticle component to be displayed inside a PopupModal. This has {action: "add"}, so some buttons have texts and functions specific to the 'Add' process.
 For an existing article, the Article/index.js page is used, containing the ArticleComponent. It has id and {action: "view"} and it calls getStatuses first, which is needed when an article is deleted.
 
@@ -62,15 +67,4 @@ In css I used the grid layout for ticket columns, which is better than a flex la
 
 **Future tasks**
 A real project would require additional work, which I haven't dealt with, to reduce the amount of time invested:
-Tests, form validation, input sanitization, success messages, more customisation etc.
-
-
-
-
-
-
-
-
-
-
-
+Tests, form validation, input sanitization, success messages, spinner while loading, more customisation, login etc.

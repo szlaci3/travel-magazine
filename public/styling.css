@@ -16,7 +16,8 @@ html {
 html body {
   font-family: Helvetica, Arial, sans-serif;
   padding-top: 15px;
-  background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;
+  /*background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;*/
+  background: #abd5ed;
 }
 
 .sl-message-info .sl-icon,

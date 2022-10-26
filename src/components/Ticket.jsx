@@ -8,39 +8,21 @@ import {hasVal} from '@/utils/utils';
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
 
-  const moveRight = async () => {
+  const moveTo = async (newStatus) => {
     let {statuses} = props;
     let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
     let currentStatus = props.status;
-    if (currentStatus < 2) {
-      let currentIdx = _statuses[currentStatus].indexOf(props.article.id);
-      _statuses[currentStatus].splice(currentIdx, 1);
-      _statuses[currentStatus + 1].push(props.article.id);
-      let res = await putStatuses({statuses: _statuses});
-      if (res.code === 0) {
-        setErrorMsg(res.msg);
-      } else {
-        props.loadData();
-      }
+    let currentIdx = _statuses[currentStatus].indexOf(props.article.id);
+    _statuses[currentStatus].splice(currentIdx, 1);
+    _statuses[newStatus].push(props.article.id);
+    let res = await putStatuses({statuses: _statuses});
+    if (res.code === 0) {
+      setErrorMsg(res.msg);
+    } else {
+      props.loadData();
     }
   }
 
-  const moveLeft = async () => {
-    let {statuses} = props;
-    let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
-    let currentStatus = props.status;
-    if (currentStatus > 0) {
-      let currentIdx = _statuses[currentStatus].indexOf(props.article.id);
-      _statuses[currentStatus].splice(currentIdx, 1);
-      _statuses[currentStatus - 1].push(props.article.id);
-      let res = await putStatuses({statuses: _statuses});
-      if (res.code === 0) {
-        setErrorMsg(res.msg);
-      } else {
-        props.loadData();
-      }
-    }
-  }
 
   return (
     <div className="ticket">
@@ -49,7 +31,7 @@ const Index = (props) => {
         setMsg={setErrorMsg}
       />
 
-      {props.status > 0 ? <div className="move left" onClick={moveLeft}/> : <div className="move disabled"/>}
+      {props.status > 0 ? <div className="move left" onClick={() => moveTo(props.status - 1)}/> : <div className="move disabled"/>}
       <Link className="inner" to={`article/${props.article.id}`}>
         <div className={`type-icon ${props.article.type?.replace(" ", "")}`}/>
         <div>
@@ -60,7 +42,7 @@ const Index = (props) => {
         <div className="assignee">Assignee: {props.users.find(user => String(user.id) === props.article.assignee)?.name}</div>
         <div className="description">{props.article.description}</div>
       </Link>
-      {props.status < 2 ? <div className="move right" onClick={moveRight}/> : <div className="move disabled"/>}
+      {props.status < 2 ? <div className="move right" onClick={() => moveTo(props.status + 1)}/> : <div className="move disabled"/>}
     </div>
   )
 };

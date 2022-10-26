@@ -4,6 +4,7 @@ import {history} from 'umi';
 import {postArticles, putArticles, getUsers, getArticles, putStatuses, deleteArticle} from '@/services/services';
 import ErrorMsg from '@/components/ErrorMsg';
 import {hasVal, delay} from '@/utils/utils';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
@@ -110,35 +111,6 @@ const Index = (props) => {
     setData(initial);
   }
 
-  const copyToClipboard = () => {
-    let text = window.location.href;
-
-    if (window.clipboardData && window.clipboardData.setData) {
-      // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
-      return clipboardData.setData("Text", text);
-    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-      let textarea = document.createElement("textarea");
-      textarea.textContent = text;
-      textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        return document.execCommand("copy");  // Security exception may be thrown by some browsers.
-      }
-      catch (ex) {
-        console.warn("Copy to clipboard failed.", ex);
-        setErrorMsg("Copy to clipboard failed.");
-        return false;
-      }
-      finally {
-        document.body.removeChild(textarea);
-        setCopyMsg("Copied.");
-      }
-    }
-  }
-
-
-
 
   return (
     <>
@@ -222,7 +194,11 @@ const Index = (props) => {
             ) : (
               <button type="button" className="save-btn" onClick={save}>Save</button>
             )}
-            <button type="button" className="copy-btn" onClick={copyToClipboard}>{copyMsg || "Copy Link"}</button>
+            <CopyToClipboard
+              text={window.location.href}
+              onCopy={(_, isSuccess) => isSuccess ? setCopyMsg("Copied.") : setErrorMsg("Copy failed.")}>
+              <button type="button" className="copy-btn">{copyMsg || "Copy Link"}</button>
+            </CopyToClipboard>            
           </>}
 
           {props.action === "add" && <>

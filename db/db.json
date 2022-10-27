@@ -3,21 +3,6 @@
     "code": 0,
     "msg": "Your request couldn't be handled."
   },
-  "trackpad": {
-    "statuses": [
-      [
-        7,
-        8
-      ],
-      [
-        5,
-        9
-      ],
-      [
-        6
-      ]
-    ]
-  },
   "articles": [
     {
       "title": "Warsaw",
@@ -26,7 +11,9 @@
       "assignee": "0",
       "duration": "19",
       "description": "City trip throughout the capital.",
-      "id": 5
+      "id": 5,
+      "status": 0,
+      "index": 0
     },
     {
       "title": "New Zealand",
@@ -35,7 +22,9 @@
       "assignee": "1",
       "reporter": "2",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem mollis aliquam ut porttitor. At erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Pulvinar sapien et ligula ullamcorper malesuada. Placerat in egestas erat imperdiet sed euismod nisi porta lorem.",
-      "id": 6
+      "id": 6,
+      "status": 0,
+      "index": 4
     },
     {
       "title": "Moldova",
@@ -44,7 +33,9 @@
       "assignee": "1",
       "duration": "9",
       "description": "Cooking recipes from various Moldovan villages.",
-      "id": 7
+      "id": 7,
+      "status": 2,
+      "index": 0
     },
     {
       "title": "Brussels",
@@ -53,7 +44,9 @@
       "assignee": "1",
       "duration": "33",
       "description": "What is best to see in the European Capital.",
-      "id": 8
+      "id": 8,
+      "status": 0,
+      "index": 3
     },
     {
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem mollis aliquam ut porttitor. At erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Pulvinar sapien et ligula ullamcorper malesuada. Placerat in egestas erat imperdiet sed euismod nisi porta lorem. Nulla facilisi cras fermentum odio eu feugiat pretium. Risus in hendrerit gravida rutrum quisque non tellus. Tellus mauris a diam maecenas sed. Turpis egestas sed tempus urna et pharetra. Molestie ac feugiat sed lectus vestibulum. Purus in mollis nunc sed id semper risus in. Risus feugiat in ante metus. Ipsum dolor sit amet consectetur adipiscing elit. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. ",
@@ -62,7 +55,9 @@
       "reporter": "1",
       "assignee": "2",
       "duration": "9",
-      "id": 9
+      "id": 9,
+      "status": 1,
+      "index": 0
     }
   ],
   "users": [

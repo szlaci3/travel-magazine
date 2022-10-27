@@ -1,7 +1,7 @@
 import ValueInput from '@/components/ValueInput';
 import {useEffect, useState} from 'react';
 import {history} from 'umi';
-import {postArticles, putArticles, getUsers, getArticles, putStatuses, deleteArticle} from '@/services/services';
+import {postArticles, putArticles, getUsers, getArticles, deleteArticle} from '@/services/services';
 import ErrorMsg from '@/components/ErrorMsg';
 import {hasVal, delay} from '@/utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -14,6 +14,7 @@ const Index = (props) => {
   const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
   const [sureDelete, setSureDelete] = useState(0);
   const [copyMsg, setCopyMsg] = useState();
+  const [kanban, setKanban] = useState([]);
 
   const id = props.match?.params?.id;
 
@@ -34,7 +35,23 @@ const Index = (props) => {
         setInitial(firstInArray);
       }
     }
+
+    loadArticles();
   }, []);
+
+  const loadArticles = async () => {
+    let articlesRes = await getArticles();
+    if (articlesRes.code === 0) {
+      setErrorMsg(articlesRes.msg);
+    } else {
+      let _kanban = [[], [], []];
+      for (let i=0; i<articlesRes.length; i++) {
+        const {status, index} = articlesRes[i];
+        _kanban[status][index] = articlesRes[i];
+      }
+      setKanban(_kanban);
+    }
+  }
 
   const onChange = ev => {
     setData({...data, [ev.target.name]: ev.target.value});
@@ -58,53 +75,32 @@ const Index = (props) => {
     if (res.code === 0) {
       setErrorMsg(res.msg);
     } else {
-      //update statuses
-      removeFromStatuses();
+      history.push("/dashboard");
     }
   }
 
   const save = async () => {
     if (props.action === "add") {
-      let res = await postArticles(data);
+      const lastItemInCol = [...kanban[0]].reverse()[0];
+      const _data = {
+        ...data,
+        status: 0,
+        index: lastItemInCol ? lastItemInCol.index + 1 : 0,
+      }
+      let res = await postArticles(_data);
       if (res.code === 0) {
         setErrorMsg(res.msg);
         return;
       }
 
-      //Add to statuses
-      addToStatuses(res.id);
+      //reload dashboard data
+      props.loadArticles();
+      props.closePopup();
     } else {
       putArticles(data);
       setIsEdit(false);
     } 
   } 
-
-  const addToStatuses = async (newId) => {
-    let {statuses} = props;
-    let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
-    _statuses[0].push(newId);
-    let res = await putStatuses({statuses: _statuses});
-    if (res.code === 0) {
-      setErrorMsg(res.msg);
-    } else {
-      //reload dashboard data
-      props.loadArticles();
-      props.closePopup();
-    }
-  }
-
-  const removeFromStatuses = async () => {
-    let {statuses} = props;
-    let _statuses = [[...statuses[0]], [...statuses[1]], [...statuses[2]]];
-    let currentIdx = _statuses[props.status].indexOf(id);
-    _statuses[props.status].splice(currentIdx, 1);
-    let res = await putStatuses({statuses: _statuses});
-    if (res.code === 0) {
-      setErrorMsg(res.msg);
-    } else {
-      history.push("/dashboard");
-    }
-  }
 
   const onCancel = () => {
     setIsEdit(false);

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "npm run start:dev",
     "start": "cross-env UMI_ENV=dev umi dev",
-    "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev"
+    "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
+    "test": "react-scripts test",
+    "test:coverage": "npm run test -- --coverage --watchAll=false"
   },
   "browserslist": [
     "> 1%",
@@ -14,11 +16,14 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^13.0.10",
     "@umijs/route-utils": "^2.0.0",
     "moment": "^2.29.4",
-    "react": "^17.0.0",
-    "react-copy-to-clipboard": "^5.1.0",
+    "react": "^17.0.2",
     "react-dom": "^17.0.0",
+    "react-scripts": "^4.0.3",
     "umi": "^3.5.0",
     "umi-request": "^1.4.0"
   },

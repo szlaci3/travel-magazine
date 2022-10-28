@@ -2,14 +2,14 @@ import {getArticles, getUsers} from '@/services/services';
 import {useEffect, useState} from 'react';
 import ErrorMsg from '@/components/ErrorMsg';
 import Ticket from '@/components/Ticket';
-import AddArticle from '@/components/AddArticle';
+import ArticleComponent from '@/components/ArticleComponent';
+import PopupModal from '@/components/PopupModal';
 
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
   const [users, setUsers] = useState();
   const [articles, setArticles] = useState();
   const [data, setData] = useState();
-  const [statuses, setStatuses] = useState();
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
 
   useEffect(async () => {
@@ -43,13 +43,19 @@ const Index = (props) => {
       msg={errorMsg}
       setMsg={setErrorMsg}
     />
-    <AddArticle
+
+    <PopupModal
       display={displayAddArticle}
       closePopup={() => setDisplayAddArticle(false)}
-      className="add-article"
-      statuses={statuses}
-      loadArticles={loadArticles}
-     />
+      className="article"
+    >
+      <ArticleComponent
+        action="add"
+        loadArticles={loadArticles}
+        closePopup={() => setDisplayAddArticle(false)}
+       />
+    </PopupModal>
+
 
     <header>
       <h1>Travel Magazine</h1>

@@ -141,6 +141,8 @@ html body {
   color: #7F7F7F;
   z-index: 100;
   border-radius: 4px;
+}
+.article-inner {
   padding: 18px 26px;
 }
 .popup.centered {
@@ -443,18 +445,18 @@ header,
 .block > .column {
   min-height: 80vh;
 }
-.popup.article.status-none {
+.article-inner.status-none {
   border-bottom: 6px solid transparent;
 }
-.popup.article.status-0,
+.article-inner.status-0,
 .column.todo .ticket {
   border-bottom: 6px solid var(--todo-color);
 }
-.popup.article.status-1,
+.article-inner.status-1,
 .column.in-progress .ticket {
   border-bottom: 6px solid var(--in-progress-color);
 }
-.popup.article.status-2,
+.article-inner.status-2,
 .column.completed .ticket {
   border-bottom: 6px solid var(--completed-color);
 }

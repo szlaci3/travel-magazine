@@ -109,7 +109,7 @@ const Index = (props) => {
 
 
   return (
-    <>
+    <div className={`article-inner status-${hasVal(data.status) ? data.status : "none"}`}>
       <ErrorMsg
         msg={errorMsg}
         setMsg={setErrorMsg}
@@ -203,7 +203,7 @@ const Index = (props) => {
           </>}
         </div>
       </form>
-    </>
+    </div>
   )
 };
 

@@ -3,25 +3,26 @@ import {useEffect, useState} from 'react';
 import {history} from 'umi';
 import {postArticles, putArticles, getUsers, getArticles, deleteArticle} from '../services/services';
 import ErrorMsg from './ErrorMsg';
-import {hasVal, delay, useMountedState} from '../utils/utils';
+import {hasVal, delay} from '../utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import useMountedState from 'react-usemountedstate';
 
 const Index = (props) => {
-  const [errorMsg, setErrorMsg] = useState();
-  const [users, setUsers] = useState([]);
-  const [data, setData] = useState({});
-  const [initial, setInitial] = useState({});
+  const useStateIfMounted = useMountedState();
+  const [errorMsg, setErrorMsg] = useStateIfMounted();
+  const [users, setUsers] = useStateIfMounted([]);
+  const [data, setData] = useStateIfMounted({});
+  const [initial, setInitial] = useStateIfMounted({});
+  const [sureDelete, setSureDelete] = useStateIfMounted(0);
+  const [kanban, setKanban] = useStateIfMounted([]);
+
   const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
-  const [sureDelete, setSureDelete] = useState(0);
   const [copyMsg, setCopyMsg] = useState();
-  const [kanban, setKanban] = useState([]);
   const id = props.match?.params?.id;
-  const isMounted = useMountedState();
 
 
   useEffect(async () => {
     let res = await getUsers();
-    if (!isMounted()) { return; }
     if (res.code === 0) {
       setErrorMsg(res.msg);
     } else {
@@ -30,7 +31,6 @@ const Index = (props) => {
 
     if (props.action === "view" && hasVal(id)) {
       let [firstInArray] = await getArticles({id});
-      if (!isMounted()) { return; }
       if (!firstInArray) {
         history.push("/404");
       } else {
@@ -40,11 +40,10 @@ const Index = (props) => {
     }
 
     loadArticles();
-  }, [isMounted]);
+  }, []);
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
-    if (!isMounted()) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -67,20 +66,14 @@ const Index = (props) => {
     } else {
       setSureDelete(1);
       await delay(300);
-      console.log(1, isMounted())
-      if (!isMounted()) { return; }
       setSureDelete(2);
       await delay(2500);
-      console.log(2, isMounted())
-      if (!isMounted()) { return; }
       setSureDelete(0);
     }
   }
 
   const onSureDelete = async () => {
     let res = await deleteArticle({id});
-    console.log(3, isMounted())
-    if (!isMounted()) { return; }
 
     if (res.code === 0) {
       setErrorMsg(res.msg);
@@ -98,7 +91,6 @@ const Index = (props) => {
         index: lastItemInCol ? lastItemInCol.index + 1 : 0,
       }
       let res = await postArticles(_data);
-      if (!isMounted()) { return; }
       if (res.code === 0) {
         setErrorMsg(res.msg);
         return;

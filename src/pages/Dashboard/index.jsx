@@ -5,19 +5,18 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
-import {useMountedState} from '../../utils/utils';
+import useMountedState from 'react-usemountedstate';
 
 const Index = (props) => {
-  const [errorMsg, setErrorMsg] = useState();
-  const [users, setUsers] = useState();
-  const [articles, setArticles] = useState();
-  const [data, setData] = useState();
+  const useStateIfMounted = useMountedState();
+  const [errorMsg, setErrorMsg] = useStateIfMounted();
+  const [users, setUsers] = useStateIfMounted();
+  const [data, setData] = useStateIfMounted();
+
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
-  const isMounted = useMountedState();
 
   useEffect(async () => {
     let usersRes = await getUsers();
-    if (!isMounted()) { return; }
     if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
@@ -29,7 +28,6 @@ const Index = (props) => {
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
-    if (!isMounted()) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {

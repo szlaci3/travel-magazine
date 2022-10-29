@@ -1,9 +1,10 @@
-import {getArticles, getUsers} from '@/services/services';
+import {getArticles, getUsers} from '../../services/services';
 import {useEffect, useState} from 'react';
-import ErrorMsg from '@/components/ErrorMsg';
-import Ticket from '@/components/Ticket';
-import ArticleComponent from '@/components/ArticleComponent';
-import PopupModal from '@/components/PopupModal';
+import ErrorMsg from '../../components/ErrorMsg';
+import ErrorBoundary from '../../components/ErrorBoundary';
+import Ticket from '../../components/Ticket';
+import ArticleComponent from '../../components/ArticleComponent';
+import PopupModal from '../../components/PopupModal';
 
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
@@ -37,8 +38,10 @@ const Index = (props) => {
     }
   }
 
+  const eachTicket = (article) => <Ticket key={article.id} data={data} article={article} users={users} loadData={loadArticles}/>
 
-  return <div>
+
+  return <ErrorBoundary>
     <ErrorMsg
       msg={errorMsg}
       setMsg={setErrorMsg}
@@ -68,19 +71,18 @@ const Index = (props) => {
     <article className="block">
       <section className="column todo">
         <h2>Todo</h2>
-        {data && data[0].filter(one => one).map((article, i) => <Ticket key={article.id} index={i} data={data} article={article} users={users} loadData={loadArticles}/>)}
+        {data && data[0].map(eachTicket)}
       </section>
       <section className="column in-progress">
         <h2>In Progress</h2>
-        {data && data[1].filter(one => one).map((article, i) => <Ticket key={article.id} index={i} data={data} article={article} users={users} loadData={loadArticles}/>)}
+        {data && data[1].map(eachTicket)}
       </section>
       <section className="column completed">
         <h2>Completed</h2>
-        {data && data[2].filter(one => one).map((article, i) => <Ticket key={article.id} index={i} data={data} article={article} users={users} loadData={loadArticles}/>)}
+        {data && data[2].map(eachTicket)}
       </section>
     </article>
-  </div>
+  </ErrorBoundary>    
 }
-
 
 export default Index;

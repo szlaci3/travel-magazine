@@ -13,11 +13,11 @@ const Index = (props) => {
   const [articles, setArticles] = useState();
   const [data, setData] = useState();
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
-  const mountId = useMountedState("dashboard");
+  const isMounted = useMountedState();
 
   useEffect(async () => {
     let usersRes = await getUsers();
-    if (!mountId) { return; }
+    if (!isMounted()) { return; }
     if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
@@ -29,7 +29,7 @@ const Index = (props) => {
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
-    if (!mountId) { return; }
+    if (!isMounted()) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {

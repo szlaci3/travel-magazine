@@ -16,12 +16,12 @@ const Index = (props) => {
   const [copyMsg, setCopyMsg] = useState();
   const [kanban, setKanban] = useState([]);
   const id = props.match?.params?.id;
-  const mountId = useMountedState(hasVal(id) ? String(id) : "add");
+  const isMounted = useMountedState();
 
 
   useEffect(async () => {
     let res = await getUsers();
-    if (!mountId) { return; }
+    if (!isMounted()) { return; }
     if (res.code === 0) {
       setErrorMsg(res.msg);
     } else {
@@ -30,7 +30,7 @@ const Index = (props) => {
 
     if (props.action === "view" && hasVal(id)) {
       let [firstInArray] = await getArticles({id});
-      if (!mountId) { return; }
+      if (!isMounted()) { return; }
       if (!firstInArray) {
         history.push("/404");
       } else {
@@ -40,11 +40,11 @@ const Index = (props) => {
     }
 
     loadArticles();
-  }, [mountId]);
+  }, [isMounted]);
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
-    if (!mountId) { return; }
+    if (!isMounted()) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -67,17 +67,20 @@ const Index = (props) => {
     } else {
       setSureDelete(1);
       await delay(300);
-      if (!mountId) { return; }
+      console.log(1, isMounted())
+      if (!isMounted()) { return; }
       setSureDelete(2);
       await delay(2500);
-      if (!mountId) { return; }
+      console.log(2, isMounted())
+      if (!isMounted()) { return; }
       setSureDelete(0);
     }
   }
 
   const onSureDelete = async () => {
     let res = await deleteArticle({id});
-    if (!mountId) { return; }
+    console.log(3, isMounted())
+    if (!isMounted()) { return; }
 
     if (res.code === 0) {
       setErrorMsg(res.msg);
@@ -95,7 +98,7 @@ const Index = (props) => {
         index: lastItemInCol ? lastItemInCol.index + 1 : 0,
       }
       let res = await postArticles(_data);
-      if (!mountId) { return; }
+      if (!isMounted()) { return; }
       if (res.code === 0) {
         setErrorMsg(res.msg);
         return;

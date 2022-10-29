@@ -1,30 +1,29 @@
-import myRequest from '../utils/myRequest';
+import request from 'umi-request';
 
 let SERVERIP = 'http://localhost:3000/';
 
 export async function fakeError(params) {
-  return myRequest(`${SERVERIP}fake-error`, params, 'GET');
+  return request.get(`${SERVERIP}fake-error`, {params});
 }
 
 export async function getArticles(params) {
-  return myRequest(`${SERVERIP}articles`, params, 'GET');
+  return request.get(`${SERVERIP}articles`, {params});
 }
 
-export async function postArticles(params) {
-  return myRequest(`${SERVERIP}articles`, params, 'POST');
+export async function postArticles(data) {
+  return request.post(`${SERVERIP}articles`, {data});
 }
 
-export async function putArticles(params) {
-  return myRequest(`${SERVERIP}articles/${params.id}`, params, 'PUT');
+export async function putArticles(data) {
+  return request.put(`${SERVERIP}articles/${data.id}`, {data});
 }
 
-export async function deleteArticle(params) {
-  return myRequest(`${SERVERIP}articles/${params.id}`, params, 'DELETE');
+export async function deleteArticle(data) {
+  return request.delete(`${SERVERIP}articles/${data.id}`);
 }
-
 
 export async function getUsers(params) {
-  return myRequest(`${SERVERIP}users`, params, 'GET');
+  return request.get(`${SERVERIP}users`, {params});
 }
 
 

@@ -13,17 +13,18 @@ export const hasVal = val => {
 
 // returns a function that when called will
 // return id if the component is mounted
-export const useMountedState = (id) => {
-  const mountedRef = useRef(false);
-  const mountId = useCallback(() => mountedRef.current, []);
+export const useMountedState = () => {
+  const mountedRef = useRef(false)
+  const isMounted = useCallback(() => mountedRef.current, [])
 
   useEffect(() => {
-    mountedRef.current = mountId;
+    mountedRef.current = true
 
     return () => {
-      mountedRef.current = false;
+      mountedRef.current = false
     }
-  }, []);
+  }, [])
 
-  return mountId;
+  return isMounted
 }
+

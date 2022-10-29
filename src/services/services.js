@@ -1,4 +1,4 @@
-import myRequest from '@/utils/myRequest';
+import myRequest from '../utils/myRequest';
 
 let SERVERIP = 'http://localhost:3000/';
 

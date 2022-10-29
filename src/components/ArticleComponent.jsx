@@ -1,9 +1,9 @@
-import ValueInput from '@/components/ValueInput';
+import ValueInput from './ValueInput';
 import {useEffect, useState} from 'react';
 import {history} from 'umi';
-import {postArticles, putArticles, getUsers, getArticles, deleteArticle} from '@/services/services';
-import ErrorMsg from '@/components/ErrorMsg';
-import {hasVal, delay} from '@/utils/utils';
+import {postArticles, putArticles, getUsers, getArticles, deleteArticle} from '../services/services';
+import ErrorMsg from './ErrorMsg';
+import {hasVal, delay, useMountedState} from '../utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Index = (props) => {
@@ -15,11 +15,13 @@ const Index = (props) => {
   const [sureDelete, setSureDelete] = useState(0);
   const [copyMsg, setCopyMsg] = useState();
   const [kanban, setKanban] = useState([]);
-
   const id = props.match?.params?.id;
+  const mountId = useMountedState(hasVal(id) ? String(id) : "add");
+
 
   useEffect(async () => {
     let res = await getUsers();
+    if (!mountId) { return; }
     if (res.code === 0) {
       setErrorMsg(res.msg);
     } else {
@@ -28,6 +30,7 @@ const Index = (props) => {
 
     if (props.action === "view" && hasVal(id)) {
       let [firstInArray] = await getArticles({id});
+      if (!mountId) { return; }
       if (!firstInArray) {
         history.push("/404");
       } else {
@@ -37,10 +40,11 @@ const Index = (props) => {
     }
 
     loadArticles();
-  }, []);
+  }, [mountId]);
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
+    if (!mountId) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -63,14 +67,17 @@ const Index = (props) => {
     } else {
       setSureDelete(1);
       await delay(300);
+      if (!mountId) { return; }
       setSureDelete(2);
       await delay(2500);
+      if (!mountId) { return; }
       setSureDelete(0);
     }
   }
 
   const onSureDelete = async () => {
     let res = await deleteArticle({id});
+    if (!mountId) { return; }
 
     if (res.code === 0) {
       setErrorMsg(res.msg);
@@ -88,6 +95,7 @@ const Index = (props) => {
         index: lastItemInCol ? lastItemInCol.index + 1 : 0,
       }
       let res = await postArticles(_data);
+      if (!mountId) { return; }
       if (res.code === 0) {
         setErrorMsg(res.msg);
         return;

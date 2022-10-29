@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import {delay} from '@/utils/utils';
+import {delay} from '../utils/utils';
 
 const Index = (props) => {
   const [cancelling, setCancelling] = useState(false);
 
-  close = async () => {
+  const close = async () => {
     setCancelling(true);
     await delay(400);
     setCancelling(false);

@@ -5,6 +5,7 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
+import {useMountedState} from '../../utils/utils';
 
 const Index = (props) => {
   const [errorMsg, setErrorMsg] = useState();
@@ -12,9 +13,11 @@ const Index = (props) => {
   const [articles, setArticles] = useState();
   const [data, setData] = useState();
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
+  const mountId = useMountedState("dashboard");
 
   useEffect(async () => {
     let usersRes = await getUsers();
+    if (!mountId) { return; }
     if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
@@ -26,6 +29,7 @@ const Index = (props) => {
 
   const loadArticles = async () => {
     let articlesRes = await getArticles();
+    if (!mountId) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -82,7 +86,7 @@ const Index = (props) => {
         {data && data[2].map(eachTicket)}
       </section>
     </article>
-  </ErrorBoundary>    
+  </ErrorBoundary>
 }
 
 export default Index;

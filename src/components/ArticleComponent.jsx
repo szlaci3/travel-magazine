@@ -92,7 +92,28 @@ const Index = (props) => {
     }
   }
 
+  const whetherValid = () => {
+    const must = [
+      "title",
+      "type",
+      "reporter",
+      "assignee",
+      "duration",
+      "description",
+    ];
+    const missing = must.filter(field => !data[field]);
+    if (missing.length > 0) {
+      setErrorMsg(`Error: ${missing.join(", ")} cannot be empty.`);
+      return false;
+    } else {
+      setErrorMsg(null);
+      return true;
+    }
+  }
+
   const save = async () => {
+    if (!whetherValid()) { return; }
+
     if (props.action === "add") {
       const lastItemInCol = [...kanban[0]].reverse()[0];
       const _data = {

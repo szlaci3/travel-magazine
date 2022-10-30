@@ -1,6 +1,6 @@
 import request from 'umi-request';
 
-let SERVERIP = 'http://localhost:3000/';
+const SERVERIP = 'http://localhost:3000/';
 
 export async function fakeError(params) {
   return request.get(`${SERVERIP}fake-error`, {params});
@@ -25,10 +25,3 @@ export async function deleteArticle(data) {
 export async function getUsers(params) {
   return request.get(`${SERVERIP}users`, {params});
 }
-
-
-
-
-
-
-

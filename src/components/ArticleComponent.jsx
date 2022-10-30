@@ -57,7 +57,7 @@ const Index = (props) => {
     }
 
     if (props.action === "add") {
-      let _kanban = [[], [], []];
+      const _kanban = [[], [], []];
       for (let i=0; i<articlesRes.length; i++) {
         const {status, index} = articlesRes[i];
         _kanban[status][index] = articlesRes[i];
@@ -83,7 +83,7 @@ const Index = (props) => {
   }
 
   const onSureDelete = async () => {
-    let res = await deleteArticle({id});
+    const res = await deleteArticle({id});
 
     if (res.code === 0) {
       setErrorMsg(res.msg);
@@ -121,7 +121,7 @@ const Index = (props) => {
         status: 0,
         index: lastItemInCol ? lastItemInCol.index + 1 : 0,
       }
-      let res = await postArticles(_data);
+      const res = await postArticles(_data);
       if (res.code === 0) {
         setErrorMsg(res.msg);
         return;

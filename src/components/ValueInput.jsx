@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 
 function ValueInput(props) {
   const [value, setValue] = useState(props.value);
-  let {
+  const {
     type = "text",
     inputProps = {},
   } = props;

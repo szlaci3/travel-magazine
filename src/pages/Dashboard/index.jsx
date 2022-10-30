@@ -42,7 +42,7 @@ const Index = (props) => {
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
-      let _data = [[], [], []];
+      const _data = [[], [], []];
       for (let i=0; i<articlesRes.length; i++) {
         const {status, index} = articlesRes[i];
         _data[status][index] = articlesRes[i];

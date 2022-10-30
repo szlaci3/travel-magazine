@@ -31,13 +31,13 @@ describe('Dashboard', () => {
     // screen.debug(combos[0]);
   });
 
-  it('can load Tickets in the Dashboard', async () => {
-    await act(async () => {
-      ReactDOM.render(<Dashboard />, container);
-    });
-    const firstTicket = await screen.findByTestId("0_0");
-    expect(firstTicket).toBeInTheDocument();
-    // screen.debug(firstTicket);
-  });
+  // it('can load Tickets in the Dashboard', async () => {
+  //   await act(async () => {
+  //     ReactDOM.render(<Dashboard />, container);
+  //   });
+  //   const firstTicket = await screen.findByTestId("0_0");
+  //   expect(firstTicket).toBeInTheDocument();
+  //   screen.debug(firstTicket);
+  // });
 });
 

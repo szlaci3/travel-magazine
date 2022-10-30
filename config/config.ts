@@ -8,6 +8,9 @@ const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
+  dva: {
+    hmr: true,
+  },
   targets: {
     ie: 11,
   },

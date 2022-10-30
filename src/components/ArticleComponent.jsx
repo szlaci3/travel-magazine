@@ -1,11 +1,12 @@
 import ValueInput from './ValueInput';
 import {useEffect, useState} from 'react';
 import {history} from 'umi';
-import {postArticles, putArticles, getUsers, getArticles, deleteArticle} from '../services/services';
+import {postArticles, putArticles, deleteArticle} from '../services/services';
 import ErrorMsg from './ErrorMsg';
 import {hasVal, delay} from '../utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import useMountedState from 'react-usemountedstate';
+import { connect } from 'dva';
 
 const Index = (props) => {
   const useStateIfMounted = useMountedState();
@@ -19,34 +20,43 @@ const Index = (props) => {
   const [isEdit, setIsEdit] = useState(props.action === "add");// initially enable Edit in add mode.
   const [copyMsg, setCopyMsg] = useState();
   const id = props.match?.params?.id;
+  const {dispatch} = props;
 
-
-  useEffect(async () => {
-    let res = await getUsers();
-    if (res.code === 0) {
-      setErrorMsg(res.msg);
+  useEffect(() => {
+    const {usersRes} = props;
+    if (!usersRes) {
+      dispatch({type: "global/_getUsers"});
+    } else if (usersRes.code === 0) {
+      setErrorMsg(usersRes.msg);
     } else {
-      setUsers(res);
+      setUsers(usersRes);
     }
+  }, [props.usersRes]);
 
+  useEffect(() => {
+    const {articlesRes} = props;
+    if (!articlesRes) {
+      dispatch({type: "global/_getArticles"});
+    } else if (articlesRes.code === 0) {
+      setErrorMsg(articlesRes.msg);
+    } else {
+      parseArticles(articlesRes);
+    }
+  }, [props.articlesRes]);
+
+  const parseArticles = articlesRes => {
     if (props.action === "view" && hasVal(id)) {
-      let [firstInArray] = await getArticles({id});
-      if (!firstInArray) {
+      const article = articlesRes.find(item => String(item.id) === id);
+
+      if (!article) {
         history.push("/404");
       } else {
-        setData(firstInArray);
-        setInitial(firstInArray);
+        setData(article);
+        setInitial(article);
       }
     }
 
-    loadArticles();
-  }, []);
-
-  const loadArticles = async () => {
-    let articlesRes = await getArticles();
-    if (articlesRes.code === 0) {
-      setErrorMsg(articlesRes.msg);
-    } else {
+    if (props.action === "add") {
       let _kanban = [[], [], []];
       for (let i=0; i<articlesRes.length; i++) {
         const {status, index} = articlesRes[i];
@@ -54,7 +64,7 @@ const Index = (props) => {
       }
       setKanban(_kanban);
     }
-  }
+  };
 
   const onChange = ev => {
     setData({...data, [ev.target.name]: ev.target.value});
@@ -106,6 +116,8 @@ const Index = (props) => {
   } 
 
   const onCancel = () => {
+      props.dispatch({type: "global/getState"});
+    console.log(props)
     setIsEdit(false);
     setData(initial);
   }
@@ -210,4 +222,4 @@ const Index = (props) => {
   )
 };
 
-export default Index;
+export default connect(state => state.global)(Index);

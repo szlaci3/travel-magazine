@@ -1,4 +1,3 @@
-import {getArticles, getUsers} from '../../services/services';
 import {useEffect, useState} from 'react';
 import ErrorMsg from '../../components/ErrorMsg';
 import ErrorBoundary from '../../components/ErrorBoundary';
@@ -6,6 +5,7 @@ import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
 import useMountedState from 'react-usemountedstate';
+import { connect } from 'dva';
 
 const Index = (props) => {
   const useStateIfMounted = useMountedState();
@@ -14,20 +14,31 @@ const Index = (props) => {
   const [data, setData] = useStateIfMounted();
 
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
+  const {dispatch} = props;
 
-  useEffect(async () => {
-    let usersRes = await getUsers();
+  useEffect(() => {
+    dispatch({type: "global/_getUsers"});
+    
+    loadArticles();
+  }, []);
+
+  useEffect(() => {
+    const {usersRes} = props;
+    if (!usersRes) { return; }
     if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
       setUsers(usersRes);
     }
+  }, [props.usersRes]);
 
-    loadArticles();
-  }, []);
+  const loadArticles = () => {
+    dispatch({type: "global/_getArticles"});
+  }
 
-  const loadArticles = async () => {
-    let articlesRes = await getArticles();
+  useEffect(() => {
+    const {articlesRes} = props;
+    if (!articlesRes) { return; }
     if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -38,7 +49,7 @@ const Index = (props) => {
       }
       setData(_data);
     }
-  }
+  }, [props.articlesRes]);
 
   const eachTicket = (article) => <Ticket key={article.id} data={data} article={article} users={users} loadData={loadArticles}/>
 
@@ -57,6 +68,7 @@ const Index = (props) => {
       <ArticleComponent
         action="add"
         loadArticles={loadArticles}
+        display={displayAddArticle}
         closePopup={() => setDisplayAddArticle(false)}
        />
     </PopupModal>
@@ -87,4 +99,4 @@ const Index = (props) => {
   </ErrorBoundary>
 }
 
-export default Index;
+export default connect(state => state.global)(Index);

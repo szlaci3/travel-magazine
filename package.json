@@ -25,6 +25,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
+    "react-usemountedstate": "^1.0.3",
     "umi": "^3.5.0",
     "umi-request": "^1.4.0"
   },

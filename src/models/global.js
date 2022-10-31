@@ -1,4 +1,4 @@
-import { getArticles, getUsers } from '../services/services';
+import {getArticles, getUsers} from '../services/services';
 
 export default {
   namespace: 'global',
@@ -6,14 +6,14 @@ export default {
   state: {},
 
   effects: {
-    *_getArticles({ payload }, { call, put }) {
+    * _getArticles({payload}, {call, put}) {
       const response = yield call(getArticles, payload);
       yield put({
         type: 'getArticlesReducer',
         payload: response,
       });
     },
-    *_getUsers({ payload }, { call, put }) {
+    * _getUsers({payload}, {call, put}) {
       const response = yield call(getUsers, payload);
       yield put({
         type: 'getUsersReducer',

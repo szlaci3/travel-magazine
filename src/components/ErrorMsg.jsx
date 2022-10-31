@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { delay } from '../utils/utils';
-import React from 'react';
+import React, {useState} from 'react';
+import {delay} from '../utils/utils';
 
 const Index = props => {
   const [cancelling, setCancelling] = useState(false);

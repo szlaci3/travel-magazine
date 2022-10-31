@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ErrorMsg from '../../components/ErrorMsg';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
 import useMountedState from 'react-usemountedstate';
-import { connect } from 'dva';
+import {connect} from 'dva';
 
 const Index = props => {
   const useStateIfMounted = useMountedState();
@@ -14,16 +14,16 @@ const Index = props => {
   const [data, setData] = useStateIfMounted();
 
   const [displayAddArticle, setDisplayAddArticle] = useState(false);
-  const { dispatch } = props;
+  const {dispatch} = props;
 
   useEffect(() => {
-    dispatch({ type: 'global/_getUsers' });
+    dispatch({type: 'global/_getUsers'});
 
     loadArticles();
   }, []);
 
   useEffect(() => {
-    const { usersRes } = props;
+    const {usersRes} = props;
     if (!usersRes) {
       return;
     }
@@ -36,11 +36,11 @@ const Index = props => {
   }, [props.usersRes]);
 
   const loadArticles = () => {
-    dispatch({ type: 'global/_getArticles' });
+    dispatch({type: 'global/_getArticles'});
   };
 
   useEffect(() => {
-    const { articlesRes } = props;
+    const {articlesRes} = props;
     if (!articlesRes) {
       return;
     }
@@ -50,7 +50,7 @@ const Index = props => {
     } else {
       const _data = [[], [], []];
       for (let i = 0; i < articlesRes.length; i++) {
-        const { status, index } = articlesRes[i];
+        const {status, index} = articlesRes[i];
         _data[status][index] = articlesRes[i];
       }
 
@@ -58,7 +58,7 @@ const Index = props => {
     }
   }, [props.articlesRes]);
 
-  const eachTicket = (article) => (
+  const eachTicket = article => (
     <Ticket
       key={article.id}
       data={data}
@@ -113,4 +113,4 @@ const Index = props => {
   );
 };
 
-export default connect((state) => state.global)(Index);
+export default connect(state => state.global)(Index);

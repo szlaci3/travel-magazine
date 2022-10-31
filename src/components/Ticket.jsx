@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { putArticles } from '../services/services';
+import React, {useState} from 'react';
+import {putArticles} from '../services/services';
 import ErrorMsg from './ErrorMsg';
-import { Link } from 'umi';
+import {Link} from 'umi';
 
 const Index = props => {
   const [errorMsg, setErrorMsg] = useState();
 
-  const moveTo = async (newStatus) => {
+  const moveTo = async newStatus => {
     const lastItemInCol = [...props.data[newStatus]].reverse()[0];
     const _article = {
       ...props.article,
@@ -48,7 +48,7 @@ const Index = props => {
           Reporter:{' '}
           {
             props.users.find(
-              (user) => String(user.id) === props.article.reporter
+              user => String(user.id) === props.article.reporter,
             )?.name
           }
         </div>
@@ -56,7 +56,7 @@ const Index = props => {
           Assignee:{' '}
           {
             props.users.find(
-              (user) => String(user.id) === props.article.assignee
+              user => String(user.id) === props.article.assignee,
             )?.name
           }
         </div>

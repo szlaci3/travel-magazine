@@ -7,7 +7,6 @@ html {
     --sl-dark-grey: #3c3c3c;
     --sl-middle-grey: #5d5d5d;
     --sl-light-grey: #9a9a9a;
-    
     --todo-color: #0d5c91;
     --in-progress-color: #f3c600;
     --completed-color: #39920d;
@@ -16,8 +15,7 @@ html {
 html body {
   font-family: Helvetica, Arial, sans-serif;
   padding-top: 15px;
-  /*background: #abd5ed url(bab.jpg) 0 0 / 64px repeat;*/
-  background: #abd5ed;
+  background: #abd5ed url("bab.jpg") 0 0 / 64px repeat;
 }
 
 .sl-message-info .sl-icon,
@@ -137,7 +135,7 @@ html body {
   width: 450px;
   max-width: 80%;
   position: absolute;
-  background-color: #FFFFFF;
+  background-color: #FFF;
   color: #7F7F7F;
   z-index: 100;
   border-radius: 4px;
@@ -154,10 +152,10 @@ html body {
   background-color: black;
   opacity: 0.3;
   position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
 }
 .close-tag {
@@ -183,7 +181,7 @@ html body {
 }
 .close-tag:hover {
   text-decoration: none;
-  color: #000000aa;
+  color: #000a;
 }
 .popup.article {
   width: 800px;
@@ -231,7 +229,7 @@ html body {
   vertical-align: middle;
   margin: 0 0 0 4px;
 }
-.type-icon:after {
+.type-icon::after {
   display: inline-block;
   line-height: 32px;
   font-size: 32px;
@@ -245,15 +243,15 @@ html body {
   background: white;
   content: "_";
 }
-.SightSeeing:after {
+.SightSeeing::after {
   background: #704;
   content: 'S';
 }
-.Nature:after {
+.Nature::after {
   background: #0d7dd2;
   content: 'N';
 }
-.Gourmand:after {
+.Gourmand::after {
   background: #034;
   content: 'G';
 }
@@ -261,7 +259,7 @@ html body {
   float: right;
   margin: 4px;
 }
-.ticket .type-icon:after {
+.ticket .type-icon::after {
   line-height: 15px;
   font-size: 14px;
   height: 16px;
@@ -356,7 +354,7 @@ textarea {
     border-radius: 2px;
     transition: all .3s;
 }
-input[type=number] {
+input[type="number"] {
   padding-right: 0;
 }
 textarea:hover,

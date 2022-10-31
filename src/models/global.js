@@ -1,13 +1,9 @@
-import {
-  getArticles,
-  getUsers
-} from '../services/services';
+import { getArticles, getUsers } from '../services/services';
 
 export default {
   namespace: 'global',
 
-  state: {
-  },
+  state: {},
 
   effects: {
     *_getArticles({ payload }, { call, put }) {

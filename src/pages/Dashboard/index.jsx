@@ -4,11 +4,10 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
-import useMountedState from 'react-usemountedstate';
+import {useStateIfMounted} from "use-state-if-mounted";
 import {connect} from 'dva';
 
 const Index = props => {
-  const useStateIfMounted = useMountedState();
   const [errorMsg, setErrorMsg] = useStateIfMounted();
   const [users, setUsers] = useStateIfMounted();
   const [data, setData] = useStateIfMounted();

@@ -5,11 +5,10 @@ import {postArticles, putArticles, deleteArticle} from '../services/services';
 import ErrorMsg from './ErrorMsg';
 import {hasVal, delay} from '../utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import useMountedState from 'react-usemountedstate';
+import {useStateIfMounted} from "use-state-if-mounted";
 import {connect} from 'dva';
 
 const Index = props => {
-  const useStateIfMounted = useMountedState();
   const [errorMsg, setErrorMsg] = useStateIfMounted();
   const [users, setUsers] = useStateIfMounted([]);
   const [data, setData] = useStateIfMounted({});

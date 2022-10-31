@@ -4,7 +4,7 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
 import ArticleComponent from '../../components/ArticleComponent';
 import PopupModal from '../../components/PopupModal';
-import {useStateIfMounted} from "use-state-if-mounted";
+import {useStateIfMounted} from 'use-state-if-mounted';
 import {connect} from 'dva';
 
 const Index = props => {

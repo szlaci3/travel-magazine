@@ -1,4 +1,4 @@
-import ArticleComponent from '@/components/ArticleComponent';
+import ArticleComponent from '../../components/ArticleComponent';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import React from 'react';
 

@@ -1,13 +1,12 @@
 import ValueInput from './ValueInput';
-import { useEffect, useState } from 'react';
-import { history } from 'umi';
-import { postArticles, putArticles, deleteArticle } from '../services/services';
+import React, {useEffect, useState} from 'react';
+import {history} from 'umi';
+import {postArticles, putArticles, deleteArticle} from '../services/services';
 import ErrorMsg from './ErrorMsg';
-import { hasVal, delay } from '../utils/utils';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import {hasVal, delay} from '../utils/utils';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import useMountedState from 'react-usemountedstate';
-import { connect } from 'dva';
-import React from 'react';
+import {connect} from 'dva';
 
 const Index = props => {
   const useStateIfMounted = useMountedState();
@@ -21,12 +20,12 @@ const Index = props => {
   const [isEdit, setIsEdit] = useState(props.action === 'add'); // Initially enable Edit in add mode.
   const [copyMsg, setCopyMsg] = useState();
   const id = props.match?.params?.id;
-  const { dispatch } = props;
+  const {dispatch} = props;
 
   useEffect(() => {
-    const { usersRes } = props;
+    const {usersRes} = props;
     if (!usersRes) {
-      dispatch({ type: 'global/_getUsers' });
+      dispatch({type: 'global/_getUsers'});
     } else if (usersRes.code === 0) {
       setErrorMsg(usersRes.msg);
     } else {
@@ -35,9 +34,9 @@ const Index = props => {
   }, [props.usersRes]);
 
   useEffect(() => {
-    const { articlesRes } = props;
+    const {articlesRes} = props;
     if (!articlesRes) {
-      dispatch({ type: 'global/_getArticles' });
+      dispatch({type: 'global/_getArticles'});
     } else if (articlesRes.code === 0) {
       setErrorMsg(articlesRes.msg);
     } else {
@@ -45,9 +44,9 @@ const Index = props => {
     }
   }, [props.articlesRes]);
 
-  const parseArticles = (articlesRes) => {
+  const parseArticles = articlesRes => {
     if (props.action === 'view' && hasVal(id)) {
-      const article = articlesRes.find((item) => String(item.id) === id);
+      const article = articlesRes.find(item => String(item.id) === id);
 
       if (article) {
         setData(article);
@@ -60,7 +59,7 @@ const Index = props => {
     if (props.action === 'add') {
       const _kanban = [[], [], []];
       for (let i = 0; i < articlesRes.length; i++) {
-        const { status, index } = articlesRes[i];
+        const {status, index} = articlesRes[i];
         _kanban[status][index] = articlesRes[i];
       }
 
@@ -68,8 +67,8 @@ const Index = props => {
     }
   };
 
-  const onChange = (ev) => {
-    setData({ ...data, [ev.target.name]: ev.target.value });
+  const onChange = ev => {
+    setData({...data, [ev.target.name]: ev.target.value});
   };
 
   const deleteOneArticle = async () => {
@@ -85,7 +84,7 @@ const Index = props => {
   };
 
   const onSureDelete = async () => {
-    const res = await deleteArticle({ id });
+    const res = await deleteArticle({id});
 
     if (res.code === 0) {
       setErrorMsg(res.msg);
@@ -103,7 +102,7 @@ const Index = props => {
       'duration',
       'description',
     ];
-    const missing = must.filter((field) => !data[field]);
+    const missing = must.filter(field => !data[field]);
     if (missing.length > 0) {
       setErrorMsg(`Error: ${missing.join(', ')} cannot be empty.`);
       return false;
@@ -190,7 +189,7 @@ const Index = props => {
             {isEdit ? (
               <select name='reporter' value={data.reporter} onChange={onChange}>
                 <option value={null} hidden></option>
-                {users.map((user) => (
+                {users.map(user => (
                   <option key={user.id} value={user.id}>
                     {user.name}
                   </option>
@@ -198,7 +197,7 @@ const Index = props => {
               </select>
             ) : (
               <div className='view-value select'>
-                {users.find((user) => String(user.id) === data.reporter)?.name}
+                {users.find(user => String(user.id) === data.reporter)?.name}
               </div>
             )}
           </label>
@@ -208,7 +207,7 @@ const Index = props => {
             {isEdit ? (
               <select name='assignee' value={data.assignee} onChange={onChange}>
                 <option value={null} hidden></option>
-                {users.map((user) => (
+                {users.map(user => (
                   <option key={user.id} value={user.id}>
                     {user.name}
                   </option>
@@ -216,7 +215,7 @@ const Index = props => {
               </select>
             ) : (
               <div className='view-value select'>
-                {users.find((user) => String(user.id) === data.assignee)?.name}
+                {users.find(user => String(user.id) === data.assignee)?.name}
               </div>
             )}
           </label>
@@ -225,7 +224,7 @@ const Index = props => {
             <span>Hours needed</span>
             <ValueInput
               type='number'
-              inputProps={{ min: 0 }}
+              inputProps={{min: 0}}
               name='duration'
               value={data.duration}
               onComplete={onChange}
@@ -315,4 +314,4 @@ const Index = props => {
   );
 };
 
-export default connect((state) => state.global)(Index);
+export default connect(state => state.global)(Index);

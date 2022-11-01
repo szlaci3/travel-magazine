@@ -42,6 +42,7 @@ const Index = props => {
       >
         <TicketContent
           article={props.article}
+          users={props.users}
         />
       </Link>
       {props.article.status < 2 ? (

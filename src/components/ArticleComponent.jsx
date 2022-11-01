@@ -7,19 +7,25 @@ import {hasVal, delay} from '../utils/utils';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useStateIfMounted} from 'use-state-if-mounted';
 import {connect} from 'dva';
+import {Input, Form, Select} from 'antd';
 
 const Index = props => {
   const [errorMsg, setErrorMsg] = useStateIfMounted();
   const [users, setUsers] = useStateIfMounted([]);
-  const [data, setData] = useStateIfMounted({});
+  const [data, setData] = useStateIfMounted();
   const [initial, setInitial] = useStateIfMounted({});
   const [sureDelete, setSureDelete] = useStateIfMounted(0);
   const [kanban, setKanban] = useStateIfMounted([]);
 
   const [isEdit, setIsEdit] = useState(props.action === 'add'); // Initially enable Edit in add mode.
   const [copyMsg, setCopyMsg] = useState();
+  const [type, setType] = useState('');
   const id = props.match?.params?.id;
   const {dispatch} = props;
+
+  const [form] = Form.useForm();
+  const {Option} = Select;
+  const {TextArea} = Input;
 
   useEffect(() => {
     const {usersRes} = props;
@@ -49,6 +55,7 @@ const Index = props => {
 
       if (article) {
         setData(article);
+        setType(article.type);
         setInitial(article);
       } else {
         history.push('/404');
@@ -92,34 +99,11 @@ const Index = props => {
     }
   };
 
-  const whetherValid = () => {
-    const must = [
-      'title',
-      'type',
-      'reporter',
-      'assignee',
-      'duration',
-      'description',
-    ];
-    const missing = must.filter(field => !data[field]);
-    if (missing.length > 0) {
-      setErrorMsg(`Error: ${missing.join(', ')} cannot be empty.`);
-      return false;
-    }
-
-    setErrorMsg(null);
-    return true;
-  };
-
-  const save = async () => {
-    if (!whetherValid()) {
-      return;
-    }
-
+  const save = async (values) => {
     if (props.action === 'add') {
       const lastItemInCol = [...kanban[0]].reverse()[0];
       const _data = {
-        ...data,
+        ...values,
         status: 0,
         index: lastItemInCol ? lastItemInCol.index + 1 : 0,
       };
@@ -133,7 +117,11 @@ const Index = props => {
       props.loadArticles();
       props.closePopup();
     } else {
-      putArticles(data);
+      const _data = {
+        ...data,
+        ...values,
+      };
+      putArticles(_data);
       setIsEdit(false);
     }
   };
@@ -142,6 +130,16 @@ const Index = props => {
     setIsEdit(false);
     setData(initial);
   };
+
+  const eachUser = user => (
+    <Option key={user.id} value={user.id}>
+      {user.name}
+    </Option>
+  );
+
+  if (!data && props.action === 'view') {
+    return null;
+  }
 
   return (
     <div
@@ -153,94 +151,89 @@ const Index = props => {
 
       {props.action === 'add' && <h2>Add Article</h2>}
 
-      <form>
-        <label className='title'>
-          <span>Title</span>
-          <ValueInput
-            name='title'
-            value={data.title}
-            onComplete={onChange}
-            disabled={!isEdit}
-          />
-        </label>
+      <Form form={form} initialValues={data} colon={false} onFinish={save} labelCol={{span: 3}} wrapperCol={{span: 21}} labelAlign="right" requiredMark={false}>
+        <Form.Item
+          name="title"
+          label="Title"
+          rules={[{required: true}]}
+          className="title"
+        >
+          <Input autoFocus allowClear disabled={!isEdit}/>
+        </Form.Item>
 
         <div className='article-type-select'>
-          <label className='type'>
-            <span>Type</span>
-            {isEdit ? (
-              <select name='type' value={data.type} onChange={onChange}>
-                <option value={null} hidden></option>
-                <option>Sight Seeing</option>
-                <option>Nature</option>
-                <option>Gourmand</option>
-              </select>
-            ) : (
-              <div className='view-value select'>{data.type}</div>
-            )}
-          </label>
+          <Form.Item
+            name="type"
+            label="Type"
+            rules={[{required: true}]}
+            className="type"
+          >
+            <Select
+              disabled={!isEdit}
+              showArrow={isEdit}
+              onChange={value => setType(value)}
+            >
+              <Option value='Sight Seeing'/>
+              <Option value='Nature'/>
+              <Option value='Gourmand'/>
+            </Select>
+          </Form.Item>
 
-          <div className={`type-icon ${data.type?.replace(' ', '')}`} />
+          <div className={`type-icon ${type.replace(' ', '')}`} />
         </div>
 
         <div>
-          <label className='reporter'>
-            <span>Reporter</span>
-            {isEdit ? (
-              <select name='reporter' value={data.reporter} onChange={onChange}>
-                <option value={null} hidden></option>
-                {users.map(user => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <div className='view-value select'>
-                {users.find(user => String(user.id) === data.reporter)?.name}
-              </div>
-            )}
-          </label>
-
-          <label className='assignee'>
-            <span>Assignee</span>
-            {isEdit ? (
-              <select name='assignee' value={data.assignee} onChange={onChange}>
-                <option value={null} hidden></option>
-                {users.map(user => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <div className='view-value select'>
-                {users.find(user => String(user.id) === data.assignee)?.name}
-              </div>
-            )}
-          </label>
-
-          <label className='duration'>
-            <span>Hours needed</span>
-            <ValueInput
-              type='number'
-              inputProps={{min: 0}}
-              name='duration'
-              value={data.duration}
-              onComplete={onChange}
+          <Form.Item
+            name="reporter"
+            label="Reporter"
+            rules={[{required: true}]}
+            className="reporter"
+          >
+            <Select
               disabled={!isEdit}
-            />
-          </label>
+              showArrow={isEdit}
+            >
+              {users.map(eachUser)}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="assignee"
+            label="Assignee"
+            rules={[{required: true}]}
+            className="assignee"
+          >
+            <Select
+              disabled={!isEdit}
+              showArrow={isEdit}
+            >
+              {users.map(eachUser)}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="duration"
+            label="Hours needed"
+            rules={[{required: true}]}
+            className="duration"
+          >
+            <Input disabled={!isEdit} type="number" min={0}/>
+          </Form.Item>
         </div>
 
-        <label className='description'>
-          <span>Description</span>
-          <textarea
-            name='description'
-            value={data.description}
-            onChange={onChange}
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[{required: true}]}
+          className="description"
+        >
+          <TextArea
             disabled={!isEdit}
+            maxLength={500}
+            autoSize={{minRows: 3, maxRows: 12}}
+            showCount
           />
-        </label>
+        </Form.Item>
 
         <div className={`btns ${props.action}`}>
           {props.action === 'view' && (
@@ -266,7 +259,7 @@ const Index = props => {
                 </button>
               )}
               {isEdit ? (
-                <button type='button' className='save-btn' onClick={save}>
+                <button type='submit' className='save-btn'>
                   Save
                 </button>
               ) : (
@@ -308,7 +301,7 @@ const Index = props => {
             </>
           )}
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

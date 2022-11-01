@@ -40,8 +40,6 @@ describe('TicketContent', () => {
       ReactDOM.render(<TicketContent
         article={article}
         users={users}
-        data={[]}
-        loadData={() => {}}
       />, container);
     });
     const title = await screen.findByText(article.title);

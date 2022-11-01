@@ -12,7 +12,6 @@ const Index = props => {
   const [errorMsg, setErrorMsg] = useStateIfMounted();
   const [users, setUsers] = useStateIfMounted([]);
   const [data, setData] = useStateIfMounted(props.action === 'add' ? {} : null);
-  const [initial, setInitial] = useStateIfMounted({});
   const [sureDelete, setSureDelete] = useStateIfMounted(0);
   const [kanban, setKanban] = useStateIfMounted([]);
 
@@ -55,7 +54,6 @@ const Index = props => {
       if (article) {
         setData(article);
         setType(article.type);
-        setInitial(article);
       } else {
         history.push('/404');
       }
@@ -123,7 +121,8 @@ const Index = props => {
 
   const onCancel = () => {
     setIsEdit(false);
-    form.setFieldsValue(initial);
+    form.resetFields();
+    setType(data.type);
   };
 
   const eachUser = user => (

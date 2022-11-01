@@ -15,6 +15,54 @@ npm start
 ```
 (You'll need to open another command prompt to run the last line.)
 
+//
+
+The "users" and "articles" state variables are managed globally, using the "dva" package to create a store and reducers.
+These variables are needed in both pages: Dashboard and Articles.
+The store performs the corresponding side effects to load data through APIs.
+
+Articles will consume the store data, but if the article is opened from a shared link, the empty store will cause the APIs to be called.
+In case of add, we need the whole kanban structure, to know what will be the index of the new article. The kanban structure is loaded already because  we are on dashboard. 
+In case of view, we need the data of the very article. It is likely that the dashboard page was loaded before, and we already have the kanban structure, so we select the article with the given id. We do this instead of calling getArticle/id. So a getArticles Api call is only needed if this is a shared link.
+
+In Dashboard, loadArticles() holds the code for  populating the kanban, so it can be called both  initially and after moveTo, delete or edit.
+
+Packages that I installed are, one to copy to clipboard as suggested by a code reviewer, and one provides useStateIfMounted, for states that change after Api calls or setTimeouts.
+
+Test 
+I only added a few simple tests, so this is just a beginning, far from being complete. They can be run by:
+npm test
+
+Lint
+
+Form
+For the form in Articles, I used the Form component from Ant Design.
+- It doesn't need state variables because Form controls its values by useForm.
+- Extra features are: counter and autoSize for textarea.
+- "antd" has been already included in the create-react-app package collection.
+I still have a "type" state variable, to display an "icon" for the article type. 
+For initialValues to work, the Form needs to be created when the values are already loaded. At cancel, form.resetFields() is called.
+
+Validation
+- I perform a validation to reject too short Titles and to demand all fields to be filled in.
+- Validates when "add" or "edit" is performed. 
+
+composable
+
+'npm test lint' runs for all javascript and css files.
+
+
+
+
+
+
+
+
+
+
+
+
+///
 
 ## "User's Manual"
 You work for a Travel Magazine and this Kanban will help you manage the tasks of the team.

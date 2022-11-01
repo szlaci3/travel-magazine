@@ -38,7 +38,6 @@ const Index = props => {
       <Link
         className='inner'
         to={`article/${props.article.id}`}
-        data-testid={`${props.article.status}_${props.article.index}`}
       >
         <TicketContent
           article={props.article}

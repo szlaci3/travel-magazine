@@ -35,7 +35,7 @@ Articles in the database have a status variable and an index. The index shows th
 Redux vs Dva: dva works well with umi and it was initially included.
 
 The "users" and "articles" state variables are managed globally, using the "dva" package to create a store and reducers.
-These variables are needed in both pages: Dashboard and Articles.
+These variables are needed in both pages: Dashboard and Article.
 The store performs the corresponding side effects to load data through APIs.
 
 Articles will consume the store data, but if the article is opened from a shared link, the empty store will cause the APIs to be called.
@@ -46,7 +46,7 @@ In Dashboard, loadArticles() holds the code for populating the kanban, so it can
 
 **Form**
 
-For the form in Articles, I used the Form component from Ant Design.
+For the form in Article, I used the Form component from Ant Design.
 - It doesn't need state variables because Form controls its values by useForm.
 - Extra features are: counter and autoSize for textarea.
 - "antd" has been already included in the create-react-app package collection.

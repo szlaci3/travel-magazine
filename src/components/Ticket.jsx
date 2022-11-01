@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {putArticles} from '../services/services';
 import ErrorMsg from './ErrorMsg';
 import {Link} from 'umi';
+import TicketContent from './TicketContent';
 
 const Index = props => {
   const [errorMsg, setErrorMsg] = useState();
@@ -39,28 +40,9 @@ const Index = props => {
         to={`article/${props.article.id}`}
         data-testid={`${props.article.status}_${props.article.index}`}
       >
-        <div className={`type-icon ${props.article.type?.replace(' ', '')}`} />
-        <div>
-          <span className='title'>{props.article.title} </span>
-          <span className='duration'>{props.article.duration}h </span>
-        </div>
-        <div className='reporter'>
-          Reporter:{' '}
-          {
-            props.users.find(
-              user => String(user.id) === props.article.reporter,
-            )?.name
-          }
-        </div>
-        <div className='assignee'>
-          Assignee:{' '}
-          {
-            props.users.find(
-              user => String(user.id) === props.article.assignee,
-            )?.name
-          }
-        </div>
-        <div className='description'>{props.article.description}</div>
+        <TicketContent
+          article={props.article}
+        />
       </Link>
       {props.article.status < 2 ? (
         <div

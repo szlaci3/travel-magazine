@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ErrorMsg from '../../components/ErrorMsg';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import Ticket from '../../components/Ticket';
-import ArticleComponent from '../../components/ArticleComponent';
+import ArticleContent from '../../components/ArticleContent';
 import PopupModal from '../../components/PopupModal';
 import {useStateIfMounted} from 'use-state-if-mounted';
 import {connect} from 'dva';
@@ -76,7 +76,7 @@ const Index = props => {
         closePopup={() => setDisplayAddArticle(false)}
         className='article'
       >
-        <ArticleComponent
+        <ArticleContent
           action='add'
           loadArticles={loadArticles}
           display={displayAddArticle}

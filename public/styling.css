@@ -377,8 +377,8 @@ input:focus {
   padding: 1px 5px;
 }
 .article label {
-  margin-bottom: 12px;
   display: inline-block;
+  vertical-align: middle;
 }
 .article {
   color: var(--sl-dark-grey);
@@ -401,9 +401,6 @@ input:focus {
   width: 74.9%;
 }
 .article .description textarea {
-  width: calc(100% - 84px);
-  min-height: 100px;
-  max-height: 50vh;
   line-height: 16px;
   padding-top: 2px;
 }
@@ -512,6 +509,40 @@ body > div {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
+.ant-form-item.title {
+  display: inline-block;
+}
+.ant-form-item.title label {
+    font-size: 24px;
+    padding-right: 12px;
+    color: var(--sl-light-grey);
+}
+.article .ant-input-affix-wrapper-disabled,
+.article .ant-input-affix-wrapper-disabled:hover {
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 24px;
+}
+.article .ant-select {
+  max-width: 60%;
+}
+.article .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.article .ant-select-disabled .ant-select-selector:hover,
+.duration .ant-form-item-control-input-content input:disabled,
+.duration .ant-form-item-control-input-content input:disabled:hover,
+.article .description textarea.ant-input-disabled {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--sl-dark-grey);
+}
+.article .ant-input-affix-wrapper-disabled input {
+  color: var(--sl-dark-grey);
+}
+.ant-form-item.type {
+  display: inline-block;
+}
+.article-type-select .ant-form-item-control {
+  width: 180px;
+}
 
 

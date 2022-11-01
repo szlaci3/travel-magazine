@@ -1,4 +1,3 @@
-import ValueInput from './ValueInput';
 import React, {useEffect, useState} from 'react';
 import {history} from 'umi';
 import {postArticles, putArticles, deleteArticle} from '../services/services';
@@ -12,7 +11,7 @@ import {Input, Form, Select} from 'antd';
 const Index = props => {
   const [errorMsg, setErrorMsg] = useStateIfMounted();
   const [users, setUsers] = useStateIfMounted([]);
-  const [data, setData] = useStateIfMounted();
+  const [data, setData] = useStateIfMounted(props.action === 'add' ? {} : null);
   const [initial, setInitial] = useStateIfMounted({});
   const [sureDelete, setSureDelete] = useStateIfMounted(0);
   const [kanban, setKanban] = useStateIfMounted([]);
@@ -73,10 +72,6 @@ const Index = props => {
     }
   };
 
-  const onChange = ev => {
-    setData({...data, [ev.target.name]: ev.target.value});
-  };
-
   const deleteOneArticle = async () => {
     if (sureDelete === 0) {
       setSureDelete(1);
@@ -99,7 +94,7 @@ const Index = props => {
     }
   };
 
-  const save = async (values) => {
+  const save = async values => {
     if (props.action === 'add') {
       const lastItemInCol = [...kanban[0]].reverse()[0];
       const _data = {
@@ -128,16 +123,16 @@ const Index = props => {
 
   const onCancel = () => {
     setIsEdit(false);
-    setData(initial);
+    form.setFieldsValue(initial);
   };
 
   const eachUser = user => (
-    <Option key={user.id} value={user.id}>
+    <Option key={user.id} value={String(user.id)}>
       {user.name}
     </Option>
   );
 
-  if (!data && props.action === 'view') {
+  if (!data) {
     return null;
   }
 
@@ -151,11 +146,19 @@ const Index = props => {
 
       {props.action === 'add' && <h2>Add Article</h2>}
 
-      <Form form={form} initialValues={data} colon={false} onFinish={save} labelCol={{span: 3}} wrapperCol={{span: 21}} labelAlign="right" requiredMark={false}>
+      <Form form={form} initialValues={data} colon={false} onFinish={save} labelAlign="right" requiredMark={false}>
         <Form.Item
           name="title"
           label="Title"
-          rules={[{required: true}]}
+          rules={[
+            {
+              required: true,
+            },
+            {
+              min: 4,
+              message: 'Title needs to be at least 4 letters.',
+            },
+          ]}
           className="title"
         >
           <Input autoFocus allowClear disabled={!isEdit}/>
@@ -165,7 +168,12 @@ const Index = props => {
           <Form.Item
             name="type"
             label="Type"
-            rules={[{required: true}]}
+            rules={[
+              {
+                required: true,
+                message: 'You must choose the article type before saving.',
+              },
+            ]}
             className="type"
           >
             <Select
@@ -214,7 +222,12 @@ const Index = props => {
           <Form.Item
             name="duration"
             label="Hours needed"
-            rules={[{required: true}]}
+            rules={[
+              {
+                required: true,
+                message: 'Please provide the number of hours',
+              },
+            ]}
             className="duration"
           >
             <Input disabled={!isEdit} type="number" min={0}/>
@@ -231,7 +244,7 @@ const Index = props => {
             disabled={!isEdit}
             maxLength={500}
             autoSize={{minRows: 3, maxRows: 12}}
-            showCount
+            showCount={isEdit}
           />
         </Form.Item>
 
@@ -288,7 +301,7 @@ const Index = props => {
 
           {props.action === 'add' && (
             <>
-              <button type='button' className='save-btn' onClick={save}>
+              <button type='submit' className='save-btn'>
                 Save
               </button>
               <button

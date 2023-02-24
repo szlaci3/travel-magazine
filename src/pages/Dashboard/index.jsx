@@ -50,7 +50,9 @@ const Index = props => {
       const _data = [[], [], []];
       for (let i = 0; i < articlesRes.length; i++) {
         const {status, index} = articlesRes[i];
-        _data[status][index] = articlesRes[i];
+        if (status != null && index != null) {
+          _data[status][index] = articlesRes[i];
+        }
       }
 
       setData(_data);
